@@ -1,3 +1,6 @@
+span{
+	font-size: 80%;
+}
 #main_interface_container{
 	  border-radius: 5px;
 	  height: 95vh;
@@ -51,15 +54,15 @@
 }
 
 .outing_container{
-	-webkit-transition-duration: 1s;
+	-webkit-transition-duration: .5s;
 	position: absolute;
 	left:100%;
-	margin-top: 10%;
-	height: 25vh;
+	margin-top: 5%;
+	height: 24vh;
 	border: 1px solid black;
 	border-radius: 5px;
 	overflow: hidden;
-
+	box-shadow: 5px 5px 17px;
 }
 
 #plan_modal{
@@ -81,6 +84,16 @@
 .current_event{
 	-webkit-transition-duration: 1s;
 	left:0%;
+}
+
+.open_event{
+	-webkit-transition-duration: .5s;
+	height:40vh;
+}
+
+.description_span{
+	 font-size: 70%;
+  	font-style: italic;
 }
 
 

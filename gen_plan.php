@@ -1,6 +1,7 @@
 <?php
-$num_params = (count($_POST));
+$num_params = (count($_POST)-1);
 $all_results= array();
+// var_dump($_POST);
 
 /**
  * Yelp API v2.0 code sample.
@@ -31,7 +32,7 @@ $TOKEN_SECRET = 'gSQdI4sXuo77ltfjGf8WfBNI8sE';
 $API_HOST = 'api.yelp.com';
 $DEFAULT_TERM = 'dinner';
 $DEFAULT_LOCATION = 'Irvine, CA';
-$SEARCH_LIMIT = 3;
+$SEARCH_LIMIT = 7;
 $SEARCH_PATH = '/v2/search/';
 $BUSINESS_PATH = '/v2/business/';
 /** 
@@ -118,42 +119,54 @@ function query_api($term, $location) {
     $array_of_results = array();
     $return_businesses = $response->businesses;
     $num_of_results = count($return_businesses);
-
-    // echo json_encode($return_businesses[0]);
-    for($i=0;$i<$num_of_results;$i++){
     // var_dump($return_businesses);
-    $new_business = array();
-    // print_r($return_businesses[$i]);
-    // print_r($return_businesses[$i]->name);
-    $new_business['name'] = $return_businesses[$i]->name;
-    // print("<br>");
-    $new_business['image'] = $return_businesses[$i]->image_url;
-    // print_r($return_businesses[$i]->snippet_image_url);
-    // print("<br>");
-    $new_business['rating'] = $return_businesses[$i]->rating;
-    // print_r($return_businesses[$i]->rating);
-    // print("<br>");
-    $new_business['website'] = $return_businesses[$i]->url;
-    // print_r($return_businesses[$i]->url);
-    // print("<br>");
-    if(!isset($return_businesses[$i]->phone) ){
-        $new_business['phone'] = null;
-    }else{ 
-        $new_business['phone'] = $return_businesses[$i]->phone;
-    };   
-    // print_r($return_businesses[$i]->phone);
-    // print("<br>");
-    $new_business['review_count'] = $return_businesses[$i]->review_count;
-    // print_r($return_businesses[$i]->review_count);
-    // print("<br>");
-    $new_business['location'] = $return_businesses[$i]->location->coordinate;
-    // print_r($return_businesses[$i]->location->coordinate);
-    // print("<br>");
-    $new_business['categories'] = $return_businesses[$i]->categories;
-    // print_r($return_businesses[$i]->categories);
-    // print("<br>");
+    // echo json_encode($return_busineses[0]);
+    for($i=0;$i<$num_of_results;$i++){
+        $array_of_results[] = $return_businesses[$i];
+        // if(null == ($return_businesses[$i]->phone)){
+        //     print('not set');
+        //     continue;
+        // };
+       
+    // $new_business = array();
+    // // print_r($return_businesses[$i]);
+    // // print_r($return_businesses[$i]->name);
+
+    // $new_business['name'] = $return_businesses[$i]->name;
+    // // print("<br>");
+    
+    // $new_business['image'] = $return_businesses[$i]->image_url;
+       
+    
+    // // print_r($return_businesses[$i]->snippet_image_url);
+    // // print("<br>");
+    // $new_business['rating'] = $return_businesses[$i]->rating;
+    // // print_r($return_businesses[$i]->rating);
+    // // print("<br>");
+    // $new_business['website'] = $return_businesses[$i]->url;
+    // // print_r($return_businesses[$i]->url);
+    // // print("<br>");
+    
+    
+    
+            
+      
+    // $new_business['phone'] = $return_businesses[$i]->phone;
+        
+  
+    // // print_r($return_businesses[$i]->phone);
+    // // print("<br>");
+    // $new_business['review_count'] = $return_businesses[$i]->review_count;
+    // // print_r($return_businesses[$i]->review_count);
+    // // print("<br>");
+    // $new_business['location'] = $return_businesses[$i]->location->coordinate;
+    // // print_r($return_businesses[$i]->location->coordinate);
+    // // print("<br>");
+    // $new_business['categories'] = $return_businesses[$i]->categories;
+    // // print_r($return_businesses[$i]->categories);
+    // // print("<br>");
     // var_dump($new_business);
-    $array_of_results[] = $new_business;
+    // $new_business;
     
 }
     return $array_of_results;
@@ -181,13 +194,15 @@ for($i=0; $i<$num_params; $i++){
     if($_POST[$i]==null){
         continue;
     }
+        $DEFAULT_LOCATION = $_POST['location']['city'];
         $DEFAULT_TERM=$_POST[$i];
         $all_results[$i] = query_api($term, $location);
          
 };
 
-echo json_encode($all_results); 
-
+// echo json_encode($all_results); 
+// var_dump($all_results);
+echo json_encode($all_results);
 
 
 

@@ -18,7 +18,7 @@
     			$.ajax({
     					url: 'gen_plan.php',
     					dataType: 'json',
-    					data: {0: $('#search_param1').val(),1: $('#search_param2').val(),2: $('#search_param3').val()},
+    					data: {0: $('#search_param1').val(),1: $('#search_param2').val(),2: $('#search_param3').val(), location: {city: $('#location').val()}},
     					method: 'Post',
     					success:  function(response){
     						console.log('in success');
@@ -40,52 +40,75 @@
 
     						
     						for(var i=0; i<event_array.length;i++){
+    							var description_text = '';
+    							for(var cat=0; cat<event_array[i].categories.length; cat++){
+    								description_text += event_array[i].categories[cat][0] + ', '
+    							};
 
-
+    							description_text = description_text.substr(0,description_text.length-2);
     							
     							var info_container = $('<div>',{
     												class:'row outing_container col-sm-6 col-sm-offset-3',
+    												index_id: i,
 
 
     							});
     							var yelp_image = $('<img>',{
-    												src: event_array[i].image,
+    												src: event_array[i].image_url,
     												class:'result_images col-sm-12',
 
     							});
 
-    							var event_title = $('<h3>',{
+    							var event_title = $('<h5>',{
     												class: 'col-sm-12',
     												text: event_array[i].name,
 
     							});
 
+    							var description_span = $('<span>',{
+    												class: 'col-sm-12 description_span',
+    												text: description_text,
+    											
+    							})
+
     							var price_span = $('<span>',{
-    												class: 'col-sm-12',
+    												class: 'col-sm-12 event_details',
     												text: 'Price: google',
     							})
 
     							var rate_span = $('<span>',{
-    												class: 'col-sm-12',
+    												class: 'col-sm-12 event_details',
     												text: 'Rating: '+event_array[i].rating,
     							})
 
     							var review_count_span = $('<span>',{
-    												class: 'col-sm-12',
+    												class: 'col-sm-12 event_details',
     												text: 'Review Count: '+event_array[i].review_count,
     							})
 
     							var hours_op_span = $('<span>',{
-    												class: 'col-sm-12',
+    												class: 'col-sm-12 event_details',
     												text: 'Hours: google',
     							})
 
     							var distance_span = $('<span>',{
-    												class: 'col-sm-12',
-    												text: 'Distance: '+ event_array[i].location.latitude+ ' ' + event_array[i].location.longitude,
+    												class: 'col-sm-12 event_details',
+    												text: 'Address: '+ event_array[i].location.address[0]+ ', '+event_array[i].location.city+ ', '+event_array[i].location.state_code,
+    							})
+
+    							var phone_span = $('<span>',{
+    												class: 'col-sm-12 event_details',
+    												text: 'Phone: '+ event_array[i].display_phone,
+    							})
+
+    							var swap_button = $('<button>',{
+    												class: 'col-sm-12 swap_button',
+    												index_id: i,
+    												text: 'Swap Event',
+    												
     							})
     							
-    							info_container.append(yelp_image, event_title, price_span, rate_span, review_count_span, hours_op_span, distance_span);
+    							info_container.append(yelp_image, event_title, description_span, price_span, rate_span, review_count_span, hours_op_span, distance_span, phone_span, swap_button);
     							outing_results.push(info_container);
     							};
 
@@ -133,17 +156,35 @@
 
     							$('.outing_container').click(function(){
     								console.log(this);
-    								this.css('height: 40vh');
+    								$(this).toggleClass('open_event');
     							})
 
 
+								$('.swap_button').click(function(){
+									console.log(event_array);
+									console.log('clicked swap_button');
+									console.log($(this).attr('index_id'));
+									index_to_get = $(this).attr('index_id');
+									console.log(search_result[index_to_get]);
+									event_array[index_to_get] = (search_result[index_to_get][Math.floor((Math.random()*search_result[index_to_get].length))]);
+									console.log(event_array);
+									$(outing_results[index_to_get][0]).remove();
+									delete outing_results[index_to_get];
+
+									generateEventInfo(index_to_get);
+
+								})
+
+    							}
 
 
-    					}
+    					
     			})
 			    	
     })
 })
+
+
 
 
 	
@@ -175,6 +216,89 @@ function prevEvent(){
 
 
 
+							function generateEventInfo(index_to_generate){
+								
+								var description_text = '';
+    							for(var cat=0; cat<event_array[index_to_generate].categories.length; cat++){
+    								description_text += event_array[index_to_generate].categories[cat][0] + ', '
+    							};
+
+    							description_text = description_text.substr(0,description_text.length-2);
+    							
+    							var info_container = $('<div>',{
+    												class:'row outing_container col-sm-6 col-sm-offset-3',
+    												index_id: index_to_generate,
+
+
+    							});
+    							var yelp_image = $('<img>',{
+    												src: event_array[index_to_generate].image_url,
+    												class:'result_images col-sm-12',
+
+    							});
+
+    							var event_title = $('<h5>',{
+    												class: 'col-sm-12',
+    												text: event_array[index_to_generate].name,
+
+    							});
+
+    							var description_span = $('<span>',{
+    												class: 'col-sm-12 description_span',
+    												text: description_text,
+    											
+    							})
+
+    							var price_span = $('<span>',{
+    												class: 'col-sm-12 event_details',
+    												text: 'Price: google',
+    							})
+
+    							var rate_span = $('<span>',{
+    												class: 'col-sm-12 event_details',
+    												text: 'Rating: '+event_array[index_to_generate].rating,
+    							})
+
+    							var review_count_span = $('<span>',{
+    												class: 'col-sm-12 event_details',
+    												text: 'Review Count: '+event_array[index_to_generate].review_count,
+    							})
+
+    							var hours_op_span = $('<span>',{
+    												class: 'col-sm-12 event_details',
+    												text: 'Hours: google',
+    							})
+
+    							var distance_span = $('<span>',{
+    												class: 'col-sm-12 event_details',
+    												text: 'Address: '+ event_array[index_to_generate].location.address[0]+ ', '+event_array[index_to_generate].location.city+ ', '+event_array[index_to_generate].location.state_code,
+    							})
+
+    							var phone_span = $('<span>',{
+    												class: 'col-sm-12 event_details',
+    												text: 'Phone: '+ event_array[index_to_generate].display_phone,
+    							})
+
+    							var swap_button = $('<button>',{
+    												class: 'col-sm-12 swap_button',
+    												index_id: index_to_generate,
+    												text: 'Swap Event',
+    												
+    							})
+    							
+    							info_container.append(yelp_image, event_title, description_span, price_span, rate_span, review_count_span, hours_op_span, distance_span, phone_span, swap_button);
+    							outing_results[index_to_generate] = (info_container);
+    							$(carousel_window).append(info_container)
+
+};
+
+
+
+
+
+
+
+
 
 
     </script>
@@ -202,9 +326,10 @@ function prevEvent(){
       <div id='plan_modal'class="modal-body">
        	
        <form class ='col-sm-10' id='generate_form'>
-       		<input type='text' class='col-sm-12  search_parameters' id='search_param1' name='search_param1' placeholder='Enter first stop i.e. "Restaurant"'>
-       		<input type='text' class='col-sm-12 search_parameters' id='search_param2' name='search_param2' placeholder='Enter second stop i.e. "Bars"'>
-       		<input type='text' class='col-sm-12 col-sm-offset-6search_parameters' id='search_param3' name='search_param3' placeholder='Enter third stop i.e. "Club"'>
+       		<input type='text' value='dinner' class='col-sm-12  search_parameters' id='search_param1' name='search_param1' placeholder='Enter first stop i.e. "Restaurant"'>
+       		<input type='text' value='drinks' class='col-sm-12 search_parameters' id='search_param2' name='search_param2' placeholder='Enter second stop i.e. "Bars"'>
+       		<input type='text' value='club' class='col-sm-12  search_parameters' id='search_param3' name='search_param3' placeholder='Enter third stop i.e. "Club"'>
+       		<input type='text' value='Redlands' class='col-sm-12  search_parameters' id='location' name='location' placeholder='Enter desired location.'>
        		<select name="Week">
 			  <option value="This Week">This Week</option>
 			  <option value="Next Week">Next Week</option>
