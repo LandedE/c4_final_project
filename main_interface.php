@@ -29,7 +29,7 @@
     							event_array.push(search_result[i][Math.floor((Math.random()*search_result[i].length))])
     						}
     						console.log('event_array: ', event_array);
-    						var carousel_window = $('<div>',{
+    						carousel_window = $('<div>',{
     												class:'carousel_window col-sm-10 col-sm-offset-1'
     												
     										});
@@ -128,6 +128,8 @@
     													text: 'Wrap Up Plan',
     							})
 
+				    				
+
     							var next_button = $('<button>',{
     													type: 'button',
     													id:'next_btn',
@@ -169,11 +171,22 @@
 									event_array[index_to_get] = (search_result[index_to_get][Math.floor((Math.random()*search_result[index_to_get].length))]);
 									console.log(event_array);
 									$(outing_results[index_to_get][0]).remove();
-									delete outing_results[index_to_get];
+									
+									outing_results[index_to_get];
 
 									generateEventInfo(index_to_get);
+									console.log($(outing_results[index_to_get][0]));
+									
+									console.log(outing_results[index_to_get][0])
 
 								})
+
+								$('#accpt_btn').click(function(){
+										console.log('in accept');
+										for(var i=0; i<outing_results.length; i++){
+											$(outing_results[i][0]).addClass('current_event');
+										}
+									});
 
     							}
 
@@ -287,8 +300,30 @@ function prevEvent(){
     							})
     							
     							info_container.append(yelp_image, event_title, description_span, price_span, rate_span, review_count_span, hours_op_span, distance_span, phone_span, swap_button);
+    							info_container.addClass('current_event');
     							outing_results[index_to_generate] = (info_container);
-    							$(carousel_window).append(info_container)
+    							carousel_window.append(info_container);
+    							$(outing_results[index_to_generate]).click(function(){
+											$(outing_results[index_to_generate]).toggleClass('open_event');
+									});
+    							$('.swap_button').click(function(){
+									console.log(event_array);
+									console.log('clicked swap_button');
+									console.log($(this).attr('index_id'));
+									index_to_get = $(this).attr('index_id');
+									console.log(search_result[index_to_get]);
+									event_array[index_to_get] = (search_result[index_to_get][Math.floor((Math.random()*search_result[index_to_get].length))]);
+									console.log(event_array);
+									$(outing_results[index_to_get][0]).remove();
+									
+									outing_results[index_to_get];
+
+									generateEventInfo(index_to_get);
+									console.log($(outing_results[index_to_get][0]));
+									
+									console.log(outing_results[index_to_get][0])
+
+								})
 
 };
 
@@ -329,7 +364,7 @@ function prevEvent(){
        		<input type='text' value='dinner' class='col-sm-12  search_parameters' id='search_param1' name='search_param1' placeholder='Enter first stop i.e. "Restaurant"'>
        		<input type='text' value='drinks' class='col-sm-12 search_parameters' id='search_param2' name='search_param2' placeholder='Enter second stop i.e. "Bars"'>
        		<input type='text' value='club' class='col-sm-12  search_parameters' id='search_param3' name='search_param3' placeholder='Enter third stop i.e. "Club"'>
-       		<input type='text' value='Redlands' class='col-sm-12  search_parameters' id='location' name='location' placeholder='Enter desired location.'>
+       		<input type='text' value='Irvine' class='col-sm-12  search_parameters' id='location' name='location' placeholder='Enter desired location.'>
        		<select name="Week">
 			  <option value="This Week">This Week</option>
 			  <option value="Next Week">Next Week</option>
@@ -369,6 +404,7 @@ function prevEvent(){
 			  <option value="PM">PM</option>
 			</select>
        </form>
+       <div class='arrow-up'></div>
        <div id='gen_plan_foot' class="modal-footer">
         <button id='generate_plans_btn' type="button" class="btn btn-default col-sm-3 col-sm-offset-9">Generate Plan</button>
       </div>
@@ -382,6 +418,7 @@ function prevEvent(){
 </div>
 <!-- END OF MODAL -->
 
+	
 
 		<div id='manage_circles_btn' class='col-sm-8 col-sm-offset-2'>
 		</div>
