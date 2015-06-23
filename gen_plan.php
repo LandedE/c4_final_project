@@ -32,7 +32,7 @@ $TOKEN_SECRET = 'gSQdI4sXuo77ltfjGf8WfBNI8sE';
 $API_HOST = 'api.yelp.com';
 $DEFAULT_TERM = 'dinner';
 $DEFAULT_LOCATION = 'Irvine, CA';
-$SEARCH_LIMIT = 7;
+$SEARCH_LIMIT = 20;
 $SEARCH_PATH = '/v2/search/';
 $BUSINESS_PATH = '/v2/business/';
 /** 

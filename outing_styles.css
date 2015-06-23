@@ -1,16 +1,22 @@
 span{
 	font-size: 80%;
 }
-#main_interface_container{
+#main_interface_container, #plans-container, .plan-results, .login-page, .friend-page{
 	  border-radius: 5px;
 	  height: 95vh;
 	  margin-top: 2vh;
 	  border: 1px solid black;
 }
 
+#generate_form input{
+	height: 10vh;
+  	margin-top: 4vh;
+
+}
 
 #set_plans_btn{
 	border-radius: 5px;
+	color:white;
 	height: 20%;
 	margin-top: 7%;
 	border: 1px solid black;
@@ -38,8 +44,10 @@ span{
 }
 
 #generate_modal{
-	height: 60vh;
+	height: 82vh;
+    width: 40vw;
 }
+
 
 #generate_form{
 	height:60%;
@@ -63,6 +71,7 @@ span{
 	border-radius: 5px;
 	overflow: hidden;
 	box-shadow: 5px 5px 17px;
+	z-index:1;
 }
 
 #plan_modal{
@@ -70,9 +79,11 @@ span{
 }
 
 .carousel_window{
-	height:80%;
-	border:1px solid black;
+	height: 85%;
+	border: 1px solid black;
 	overflow: hidden;
+	width: 85%;
+	margin-top: 2vh;
 }
 
 .previous_event{
@@ -96,11 +107,69 @@ span{
   	font-style: italic;
 }
 
-.arrow-up {
-	width: 0; 
-	height: 0; 
-	border-left: 5px solid transparent;
-	border-right: 5px solid transparent;
+
+
+#map-canvas{
+	height: 30vh;
+  	width: 43vw;
+  	top: 63%;
+  	left: 8%;
+  	z-index: 0;
+}
+
+.labels {
+   color: green;
+   
+   font-family: "Lucida Grande", "Arial", sans-serif;
+   font-size: 80%;
+   font-weight: bold;
+   text-align: center;
+   
+       
+   
+   white-space: nowrap;
+ }
+
+ #next_btn{
+ 	position: absolute;
+  	bottom: 60vh;
+  	right: 5vw;
+  	height: 10vh;
+}
+ 
+#prev_btn{
+  position: absolute;
+  bottom: 60vh;
+  left: 6vw;
+  height: 10vh;
+}
+
+.hidden_button{
+	display: none;
+}
+ 
+.individual_friend{
+	height:10%;
+	border: 1px solid black;
+}
+
+.individual_avatar{
+	height:6vh;
+	margin-top:1%;
 	
-	border-bottom: 5px solid black;
+	border: 1px solid black;
+}
+
+.friend_container{
+	height: 80%;
+	border: 1px solid black;
+}
+
+.username_span{
+	font-size: 130%;
+  	margin-top: 3.5%;
+}
+
+.select_friend{
+	height:100%;
 }
