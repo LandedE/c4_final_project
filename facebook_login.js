@@ -119,10 +119,12 @@
 
 
 function displayFriends(arr){
+
       for(var i=0; i<arr.length; i++){
         var individual_friend = $('<div>',{
                                 class: 'individual_friend col-sm-12',
                                 id: 'individual_friend'+i,
+                                userId: arr[i].UserID,
 
         });
 
@@ -140,14 +142,46 @@ function displayFriends(arr){
         var check_button = $('<input>',{
                               type:'checkbox',
                               id: 'check'+i,
-                              class:'col-sm-3 col-sm-offset-2 select_friend',
-                              text: 'Invite Friend', 
-        })
+                              index_id: i,
+                              class:'col-sm-1 col-sm-offset-4 select_friend checkbutton',
+                              text: 'Invite Friend',
+                              userId: arr[i].UserID, 
+        });
+
+      
+
 
         individual_friend.append(individual_avatar, username_span, check_button);
         $('.friend_container').append(individual_friend);
 
+        
       }
+
+        var invite_button = $('<button>',{
+                            type: 'button',
+                            id:'invite_btn',
+                            class:'col-sm-4 col-sm-offset-1',
+                            text:'Send Invtes',
+                           
+        });  
+     
+      $('.friend-page').append(invite_button);
+
+      $('.checkbutton').click(function(){
+            console.log('click');
+            
+            
+            console.log(invitees);
+            console.log($(this)[0].attributes[4].value);
+            console.log($(this)[0].attributes[2].value);
+            if(this.checked){
+              invitees[$(this)[0].attributes[2].value]= $(this)[0].attributes[4].value;
+              console.log(invitees);
+            }else{
+              delete invitees[$(this)[0].attributes[2].value];
+              console.log(invitees);
+            }
+      })
 };
     
 

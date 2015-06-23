@@ -17,6 +17,7 @@
     var city_coordinates;
     var outing_results = [];
     var current_user_id;
+    var invitees = {};
     $(document).ready(function(){
     	
 
