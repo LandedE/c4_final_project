@@ -17,14 +17,10 @@
     var city_coordinates;
     var outing_results = [];
     var current_user_id;
-    var invitees = {};
+    var event_object = {};
+    event_object['invitees'] = {};
     $(document).ready(function(){
-    	
-
-
-
-
-
+   
     	
     	 $('.logout_button').click(function(){
                 console.log('in logout button');
@@ -44,6 +40,9 @@
     	
     	
     	$('#generate_plans_btn').click(function(){
+    				event_object['date'] = $('#week').val() +' ' + $('#day').val() + ':' + $('#hour').val() + 
+    				':' + $('#minute').val() + ' ' + $('#day_night').val();
+    				console.log(event_object);
     				var promise = 
 						$.ajax({
 							url: 'https://maps.googleapis.com/maps/api/geocode/json?address='+$('#location').val()+'&key=AIzaSyCQNq766unXxvfCp1ZJ-aMCIT8tMmglOlo',
@@ -207,6 +206,8 @@
 								})
 
 								$('#accpt_btn').click(function(){
+										event_object['event_id'] = current_user_id+1; 
+										console.log('event_object: ',event_object);
 										console.log('in accept');
 										for(var i=0; i<outing_results.length; i++){
 											$(outing_results[i][0]).addClass('current_event');
@@ -472,13 +473,11 @@ function prevEvent(){
 											$(outing_results[index_to_generate]).toggleClass('open_event');
 									});
     							$('.swap_button').click(function(){
-									console.log(event_array);
-									console.log('clicked swap_button');
-									console.log($(this).attr('index_id'));
+									
 									index_to_get = $(this).attr('index_id');
-									console.log(search_result[index_to_get]);
+									
 									event_array[index_to_get] = (search_result[index_to_get][Math.floor((Math.random()*search_result[index_to_get].length))]);
-									console.log(event_array);
+									
 									$(outing_results[index_to_get][0]).remove();
 									
 									outing_results[index_to_get];
@@ -487,6 +486,7 @@ function prevEvent(){
 									console.log($(outing_results[index_to_get][0]));
 									
 									console.log(outing_results[index_to_get][0])
+
 
 								})
 
@@ -551,7 +551,25 @@ function filterByDistance(center, outing, i, j){
 		}
 };
 		
+function sendInvites(obj){
+    		if(obj.length ==0){
+    			console.log('Please select friends to invite.')
+    		}else {
+    			$.ajax({
+    					url:'invite_friends.php',
+    					dataType: 'text',
+    					data: obj,
+    					method: 'post',
+    					success: function(response){
+    						console.log('in success');
+    						console.log(response);
+    					}
+    			})
 
+    				
+    			
+    		}
+    	};
 
 
 
@@ -590,12 +608,12 @@ function filterByDistance(center, outing, i, j){
        		<input type='text' value='club' class='col-sm-12  search_parameters' id='search_param3' name='search_param3' placeholder='Enter third stop i.e. "Club"'>
        		<input type='text' value='Irvine' class='col-sm-12  search_parameters' id='location' name='location' placeholder='Enter desired location.'>
        		<h5 class='col-sm-8 col-sm-offset-4'>Set Time:</h5>
-       		<select class='col-sm-3' name="Week">
+       		<select class='col-sm-3' name="Week" id="week">
 			  <option value="This Week">This Week</option>
 			  <option value="Next Week">Next Week</option>
 			  
 			</select>
-       		<select class='col-sm-3' name="day">
+       		<select class='col-sm-3' name="day" id='day'>
 			  <option value="Monday">Monday</option>
 			  <option value="Tuesday">Tuesday</option>
 			  <option value="Wednesday">Wednesday</option>
@@ -604,7 +622,7 @@ function filterByDistance(center, outing, i, j){
 			  <option value="Saturday">Saturday</option>
 			  <option value="Sunday">Sunday</option>
 			</select>
-			<select class='col-sm-3' name="hour">
+			<select class='col-sm-3' name="hour" id='hour'>
 			  <option value="1">1</option>
 			  <option value="2">2</option>
 			  <option value="3">3</option>
@@ -612,19 +630,19 @@ function filterByDistance(center, outing, i, j){
 			  <option value="5">5</option>
 			  <option value="6">6</option>
 			  <option value="7">7</option>
-			  <option value="8">8</option>
+			  <option value="8">8</option> 
 			  <option value="9">9</option>
 			  <option value="10">10</option>
 			  <option value="11">11</option>`
 			  <option value="12">12</option>
 			</select>
-			<select class='col-sm-2' name="minute">
+			<select class='col-sm-2' name="minute" id="minute">
 			  <option value="00">00</option>
 			  <option value="15">15</option>
 			  <option value="30">30</option>
 			  <option value="45">45</option>
 			</select>
-			<select class='col-sm-1' name="morn_eve">
+			<select class='col-sm-1' name="morn_eve" id="day_night">
 			  <option value="AM">AM</option>
 			  <option value="PM">PM</option>
 			</select>

@@ -46,6 +46,11 @@
 
             displayFriends(response);
 
+           $('#invite_btn').click(function(){
+              console.log('invite button clicked');
+              sendInvites(event_object);
+             });
+
           }
         })
       });
@@ -161,26 +166,32 @@ function displayFriends(arr){
                             type: 'button',
                             id:'invite_btn',
                             class:'col-sm-4 col-sm-offset-1',
-                            text:'Send Invtes',
+                            text:'Send Invites',
+
                            
         });  
+
+       
      
       $('.friend-page').append(invite_button);
 
       $('.checkbutton').click(function(){
-            console.log('click');
+            console.log('click');           
+            event_object['user_id'] = current_user_id;
+            console.log(event_object);
             
-            
-            console.log(invitees);
-            console.log($(this)[0].attributes[4].value);
-            console.log($(this)[0].attributes[2].value);
+           
+            console.log(this.checked);
             if(this.checked){
-              invitees[$(this)[0].attributes[2].value]= $(this)[0].attributes[4].value;
-              console.log(invitees);
+               event_object.invitees[$(this).attr('index_id')] = $(this).attr('userid');
+              console.log(event_object);
             }else{
-              delete invitees[$(this)[0].attributes[2].value];
-              console.log(invitees);
+              console.log('in delete');
+              delete event_object.invitees[$(this).attr('index_id')];
+              console.log(event_object);
             }
+
+            event_object['outing'] = event_array;
       })
 };
     
