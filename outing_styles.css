@@ -1,7 +1,7 @@
 span{
 	font-size: 80%;
 }
-#main_interface_container, #plans-container, .plan-results, .login-page, .friend-page, .pending_invitations{
+#main_interface_container, #plans-container, .plan-results, .login-page, .friend-page, .pending_invitations, .manage_circles{
 	  border-radius: 5px;
 	  height: 95vh;
 	  margin-top: 2vh;
@@ -182,6 +182,7 @@ span{
 .event_container{
 	border: 1px solid black;
 	margin-bottom: 1vh;
+	height: 10%;
 }
 
 .venue_container{
@@ -193,10 +194,25 @@ span{
 	display: none;
 }
 
+.group_friends{
+  position: relative;
+  top: 85%;
+  right: 50%;
+}
 
+.group_container{
+	height: 80%;
+	border: 1px solid black;
+}
 
+.list_of_friends{
+	height: 80%;
+	border: 1px solid black;
+}
 
-
+.event_owner_pic{
+	height:90%;
+}
 
 
 

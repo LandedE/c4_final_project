@@ -158,6 +158,7 @@ function displayFriends(arr){
 
         individual_friend.append(individual_avatar, username_span, check_button);
         $('.friend_container').append(individual_friend);
+        $('.list_of_friends').append(individual_friend);
 
         
       }

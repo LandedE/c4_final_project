@@ -22,6 +22,14 @@
     $(document).ready(function(){
    		
 
+    	function addGroup(){
+
+			var group_div = $('<div>',{
+								class:'col-sm-12 group_container',
+								text: $('#group_name').val(),
+							});		
+    	};
+
 
     	function createEventDiv(event_of_venues){
     		
@@ -35,15 +43,15 @@
    													src: event_of_venues[0].EventOwnerPicture,
    							});
    							var event_owner_name = $('<span>',{
-   													class: 'col-sm-2 event_owner_name_span',
+   													class: 'col-sm-10 event_owner_name_span',
    													text: 'Event Owner: ' + event_of_venues[0].EventOwner,  													
    							});
 
    							event_container.append(event_owner_pic, event_owner_name);
    							for(var i=0; i<event_of_venues.length; i++){
    								var event_description_span = $('<span>',{
-   													class: 'col-sm-2 venues_description_span',
-   													text: event_of_venues[i].VenueJson.name +': ' +event_of_venues[i].EventDetails,  													
+   													class: 'col-sm-10 venues_description_span',
+   													text: i+1+": " +event_of_venues[i].VenueJson.name +': ' +event_of_venues[i].EventDetails,  													
    								});
    								event_container.append(event_description_span);
    							}
@@ -772,10 +780,6 @@ function sendInvites(obj){
 		<div class='friend-page col-sm-8 col-sm-offset-2'>
 			<h3 class='col-sm-2 col-sm-offset-5'>Who's Invited?</h3>
 			<div class='friend_container col-sm-6'></div>
-			
-
-			
-
 		</div>
 
 		<div class="pending_invitations col-sm-8 col-sm-offset-2">
@@ -783,6 +787,15 @@ function sendInvites(obj){
 			<div class='invitations_container col-sm-5'></div>
 			<div class='details_of_event col-sm-6 col-sm-offset-1'></div>
         </div>
+
+        <div class='manage_circles col-sm-8 col-sm-offset-2'>
+			<h3 class='col-sm-4 col-sm-offset-5'>Manage Circles</h3>
+			<div class='group_container col-sm-5'>
+				<button class='col-sm-12 add_group_button'>Add Group</button>
+				<input class='col-sm-12 hidden' type='text' id='group_name' placeholder='Enter Group Name'>
+			</div>
+			<div class='list_of_friends col-sm-6 col-sm-offset-1'></div>
+		</div>
       
     </div>
 
