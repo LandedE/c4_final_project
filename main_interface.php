@@ -20,7 +20,112 @@
     var event_object = {};
     event_object['invitees'] = {};
     $(document).ready(function(){
-   
+   		
+
+
+    	function createEventDiv(event_of_venues){
+    		
+    						var event_container = $('<div>',{
+   													class:'col-sm-12 event_container',
+   													index_id: event_of_venues[0]['Outing ID'],
+
+   							});
+   							var event_owner_pic = $('<img>',{
+   													class:'col-sm-2 event_owner_pic',
+   													src: event_of_venues[0].EventOwnerPicture,
+   							});
+   							var event_owner_name = $('<span>',{
+   													class: 'col-sm-2 event_owner_name_span',
+   													text: 'Event Owner: ' + event_of_venues[0].EventOwner,  													
+   							});
+
+   							event_container.append(event_owner_pic, event_owner_name);
+   							for(var i=0; i<event_of_venues.length; i++){
+   								var event_description_span = $('<span>',{
+   													class: 'col-sm-2 venues_description_span',
+   													text: event_of_venues[i].VenueJson.name +': ' +event_of_venues[i].EventDetails,  													
+   								});
+   								event_container.append(event_description_span);
+   							}
+   							$('.invitations_container').append(event_container);
+
+   		
+					   		$('.event_container').hover(function(){
+					   				console.log(this);
+					   				var event_id_to_show = $(this).attr('index_id');
+					   				var venues = '.venue_of'+event_id_to_show;
+					   				console.log(venues);
+					   				$(venues).toggleClass('hidden');
+					   		});
+
+    	};
+
+
+   		function createVenueDiv(individual_venue){
+   			console.log(individual_venue);
+   							var venue_container = $('<div>',{
+   													class:'col-sm-12 hidden venue_container venue_of'+individual_venue['Outing ID'],
+   													
+
+   							});
+   							var venue_pic = $('<img>',{
+   													class: 'col-sm-2 venue_pic',
+   													src: individual_venue.VenueJson['image_url'],  													
+   							});
+   							var venue_details_span = $('<span>',{
+   													class: 'col-sm-2 venue_details_span',
+   													text: individual_venue.EventDetails,  													
+   							});
+   							var venue_rating = $('<img>',{
+   													class: 'col-sm-2 venue_pic',
+   													src: individual_venue.VenueJson['rating_img_url'],  													
+   							});
+   							var venue_review_count = $('<span>',{
+   													class: 'col-sm-2 venue_review_count',
+   													text: 'Review count: ' + individual_venue.VenueJson['review_count'],  													
+   							});
+   							var venue_address = $('<span>',{
+   													class: 'col-sm-4  venue_address',
+   													text: 'Address: ' + individual_venue.Address +", " + individual_venue.VenueJson.location.city,  													
+   							});
+   							var venue_website = $('<span>',{
+   													class: 'col-sm-12 venue_website',
+   													text: 'Website: ' + individual_venue.VenueJson['url'],  													
+   							});
+
+   							venue_container.append(venue_pic, venue_details_span, venue_rating, venue_review_count, venue_address, venue_website);
+   							$('.details_of_event').append(venue_container);
+   		};
+
+
+   		function getInvitations(user_id){
+   			console.log('in get invitations function');
+   			$.ajax({
+   					url: 'get_invites.php',
+   					dataType: 'json',
+   					data: {user_id: user_id},
+   					method: 'post',
+   					success: function(response){
+   						console.log('in success')
+   						console.log(response);
+   						window.invitations = response;
+   						for(var i=0; i<invitations.length; i++){
+   							createEventDiv(invitations[i]);
+							for(var j=0; j<invitations[i].length; j++){
+								createVenueDiv(invitations[i][j]);
+							
+						}
+   					}
+   				}
+
+   			})
+   		};
+
+
+   		$('#get_invites_btn').click(function(){
+   				
+   				getInvitations(current_user_id);
+   		})
     	
     	 $('.logout_button').click(function(){
                 console.log('in logout button');
@@ -594,8 +699,8 @@ function sendInvites(obj){
 
 		<button id='manage_circles_btn' class='col-sm-8 col-sm-offset-2'>Manage Friends</button>
 		
-		<div id='reminisce_btn' class='col-sm-8 col-sm-offset-2'>
-		</div>
+		<button id='get_invites_btn' class='col-sm-8 col-sm-offset-2'>Pending Events</button>
+		
 	</div>
 	
 	<div id="plans-container" class="col-sm-8 col-sm-offset-2">
@@ -673,7 +778,11 @@ function sendInvites(obj){
 
 		</div>
 
-      </div>
+		<div class="pending_invitations col-sm-8 col-sm-offset-2">
+			<h3 class='col-sm-7 col-sm-offset-5'>Pending Invitations</h3>
+			<div class='invitations_container col-sm-5'></div>
+			<div class='details_of_event col-sm-6 col-sm-offset-1'></div>
+        </div>
       
     </div>
 

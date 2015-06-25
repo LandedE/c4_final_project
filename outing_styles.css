@@ -1,7 +1,7 @@
 span{
 	font-size: 80%;
 }
-#main_interface_container, #plans-container, .plan-results, .login-page, .friend-page{
+#main_interface_container, #plans-container, .plan-results, .login-page, .friend-page, .pending_invitations{
 	  border-radius: 5px;
 	  height: 95vh;
 	  margin-top: 2vh;
@@ -31,7 +31,7 @@ span{
 	background-color: #0F2B3B;
 }
 
-#reminisce_btn{
+#get_invites_btn{
 	border-radius: 5px;
 	height: 20%;
 	margin-top: 7%;
@@ -173,3 +173,30 @@ span{
 .select_friend{
 	height:100%;
 }
+
+.invitations_container, .details_of_event{
+	border: 1px solid black;
+	height: 80vh;
+}
+
+.event_container{
+	border: 1px solid black;
+	margin-bottom: 1vh;
+}
+
+.venue_container{
+	border: 1px solid black;
+	margin-bottom: 1vh;
+}
+
+.hidden{
+	display: none;
+}
+
+
+
+
+
+
+
+
