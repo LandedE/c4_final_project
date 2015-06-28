@@ -3,7 +3,10 @@
 	
 	$conn = mysqli_connect("localhost","root","","Roam");
 
+	$query_input_user = "INSERT INTO `Event Affiliates`(`User Id`, `Event ID`, `Invited User`) VALUES ($_POST[user_id], $_POST[event_id], $_POST[user_id])";
 
+	$result = mysqli_query($conn, $query_input_user);
+	print(mysqli_affected_rows($conn));
 	
 	$query = "INSERT INTO `Event Affiliates`(`User Id`, `Event ID`, `Invited User`) VALUES ";
  	

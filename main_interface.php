@@ -19,17 +19,84 @@
     var current_user_id;
     var event_object = {};
     event_object['invitees'] = {};
+    var next_event_id;
     $(document).ready(function(){
    		
 
-    	function addGroup(){
+   		
 
-			var group_div = $('<div>',{
-								class:'col-sm-12 group_container',
-								text: $('#group_name').val(),
-							});		
+
+
+
+
+   //  	function addGroup(){
+
+			// var group_div = $('<div>',{
+			// 					class:'col-sm-12 group_container',
+			// 					text: $('#group_name').val(),
+			// 				});		
+   //  	};
+
+
+function sendInvites(obj){
+    		if(obj.length ==0){
+    			console.log('Please select friends to invite.')
+    		}else {
+    			$.ajax({
+    					url:'invite_friends.php',
+    					dataType: 'text',
+    					data: obj,
+    					method: 'post',
+    					success: function(response){
+    						console.log('in success');
+    						console.log(response);
+    					}
+    			})
+
+    				
+    			
+    		}
     	};
 
+
+
+			$('#set_plans_btn').click(function(){
+							console.log('set plans clicked');
+			   				$('#main_interface_container').toggleClass('hidden');
+			   				$('#plans-container').toggleClass('hidden');
+			 });
+
+			// $('.manage_circles_btn').click(function(){
+			//    				$('#main_interface').toggleClass('hidden');
+			//    				$('#plans-container').toggleClass('hidden');
+			//  });
+
+			
+			$('#get_invites_btn').click(function(){
+							console.log('get invites clicked');
+			   				$('#main_interface_container').toggleClass('hidden');
+			   				$('.pending_invitations').toggleClass('hidden');
+
+
+			 });
+
+			$('.return_to_main_from_invitations').click(function(){
+					console.log('in back to main');
+					$('#main_interface_container').toggleClass('hidden');
+			   		$('.pending_invitations').toggleClass('hidden');
+			   		$('.event_container').remove();
+			   		$('.venue_container').remove();
+
+			})
+
+			$('.return_to_main_from_set_plans').click(function(){
+					console.log('in back to main');
+					$('#main_interface_container').toggleClass('hidden');
+			   		$('.plans-container').toggleClass('hidden');
+			})
+
+
+   			
 
     	function createEventDiv(event_of_venues){
     		
@@ -58,11 +125,12 @@
    							$('.invitations_container').append(event_container);
 
    		
-					   		$('.event_container').hover(function(){
+					   		$('.invitations_container').on('click', '.event_container',function(){
+					   				console.log('clicked event_container');
 					   				console.log(this);
 					   				var event_id_to_show = $(this).attr('index_id');
 					   				var venues = '.venue_of'+event_id_to_show;
-					   				console.log(venues);
+					   				console.log('venue to show: ',venues);
 					   				$(venues).toggleClass('hidden');
 					   		});
 
@@ -100,8 +168,15 @@
    													class: 'col-sm-12 venue_website',
    													text: 'Website: ' + individual_venue.VenueJson['url'],  													
    							});
+   							var website_link = $('<a>',{
+   												class: 'col-sm-10 website_link',
+   												href: individual_venue.VenueJson['url'],
+   												text: individual_venue.VenueJson.name,
+   												target: '_blank',
+   							});
+   							console.log('website_link: ', website_link[0]);
 
-   							venue_container.append(venue_pic, venue_details_span, venue_rating, venue_review_count, venue_address, venue_website);
+   							venue_container.append(venue_pic, venue_details_span, venue_rating, venue_review_count, venue_address, venue_website,website_link[0]);
    							$('.details_of_event').append(venue_container);
    		};
 
@@ -153,6 +228,51 @@
     	
     	
     	$('#generate_plans_btn').click(function(){
+    				console.log('clicked');
+    				console.log(current_user_id);
+    				console.log('event_object');
+
+
+
+    				 function pullFriends(){
+							        $.ajax({
+							          url:'get_friends.php',
+							          dataType:'json',
+							          data: {userId: current_user_id},
+							          method: 'post',
+							          success: function(response){
+							            console.log('in response');
+							            window.pullFriendsResponse = response;
+
+										displayFriends(response);
+
+							           $('#invite_btn').click(function(){
+							           		console.log('invite button clicked');
+							           		$('.friend-page').toggleClass('hidden');
+							           		$('#main_interface_container').toggleClass('hidden');
+							              console.log('invite button clicked');
+							              sendInvites(event_object);
+							             });
+
+							          }
+							        })
+							      };
+			   			pullFriends();	
+			   
+
+
+
+
+
+
+
+
+
+
+
+
+    				$('#plans-container').toggleClass('hidden');
+    				$('.plan-results').toggleClass('hidden');
     				event_object['date'] = $('#week').val() +' ' + $('#day').val() + ':' + $('#hour').val() + 
     				':' + $('#minute').val() + ' ' + $('#day_night').val();
     				console.log(event_object);
@@ -318,18 +438,9 @@
 
 								})
 
-								$('#accpt_btn').click(function(){
-										event_object['event_id'] = current_user_id+1; 
-										console.log('event_object: ',event_object);
-										console.log('in accept');
-										for(var i=0; i<outing_results.length; i++){
-											$(outing_results[i][0]).addClass('current_event');
-										}
-									})
+
 
     							}
-
-
     					
     			}))
 			    	
@@ -386,6 +497,20 @@ function createCarousel(){
 	plan_details_foot.append(prev_button, accept_button, next_button);
 	$('.plan-results').append(plan_details_foot);
 
+		promise_for_next_event_id.then($('#accpt_btn').click(function(){
+					console.log('accept button clicked');
+					$('.friend-page').toggleClass('hidden');
+					$('.plan-results').toggleClass('hidden');
+					event_object['event_id'] = next_event_id; 
+					console.log('event_object: ',event_object);
+					console.log('in accept');
+					for(var i=0; i<outing_results.length; i++){
+						$(outing_results[i][0]).addClass('current_event');
+					}
+
+					
+				})
+	)
 }
 
 
@@ -664,29 +789,9 @@ function filterByDistance(center, outing, i, j){
 		}
 };
 		
-function sendInvites(obj){
-    		if(obj.length ==0){
-    			console.log('Please select friends to invite.')
-    		}else {
-    			$.ajax({
-    					url:'invite_friends.php',
-    					dataType: 'text',
-    					data: obj,
-    					method: 'post',
-    					success: function(response){
-    						console.log('in success');
-    						console.log(response);
-    					}
-    			})
 
-    				
-    			
-    		}
-    	};
-
-
-
-
+	
+     
 
 
 
@@ -711,7 +816,7 @@ function sendInvites(obj){
 		
 	</div>
 	
-	<div id="plans-container" class="col-sm-8 col-sm-offset-2">
+	<div id="plans-container" class="col-sm-8 col-sm-offset-2 hidden">
 		<div class="plan-form">
 
 			<h3 class='col-sm-4 col-sm-offset-4'>Set Plan Details</h3>
@@ -760,42 +865,39 @@ function sendInvites(obj){
 			  <option value="PM">PM</option>
 			</select>
         	<button id='generate_plans_btn' type="button" class="col-sm-3">Generate Plan</button>
+        	<button class='col-sm-4 col-sm-offset-4 return_to_main_from_set_plans'>Back To Main</button>
         </form>
         
 		</div>
 
-
-
-		
 		</div>
 
 	
-		<div class="plan-results col-sm-8 col-sm-offset-2">
+		<div class="plan-results col-sm-8 col-sm-offset-2 hidden">
 		<h3 class='col-sm-4 col-sm-offset-4'>Review Plan Details</h3>
-		
-       
-      </div>
+		</div>
 
 
-		<div class='friend-page col-sm-8 col-sm-offset-2'>
+		<div class='friend-page col-sm-8 col-sm-offset-2 hidden'>
 			<h3 class='col-sm-2 col-sm-offset-5'>Who's Invited?</h3>
 			<div class='friend_container col-sm-6'></div>
 		</div>
 
-		<div class="pending_invitations col-sm-8 col-sm-offset-2">
+		<div class="pending_invitations col-sm-8 col-sm-offset-2 hidden">
 			<h3 class='col-sm-7 col-sm-offset-5'>Pending Invitations</h3>
 			<div class='invitations_container col-sm-5'></div>
 			<div class='details_of_event col-sm-6 col-sm-offset-1'></div>
+			<button class='col-sm-4 col-sm-offset-4 return_to_main_from_invitations'>Back To Main</button>
         </div>
 
-        <div class='manage_circles col-sm-8 col-sm-offset-2'>
+       <!--  <div class='manage_circles col-sm-8 col-sm-offset-2'>
 			<h3 class='col-sm-4 col-sm-offset-5'>Manage Circles</h3>
 			<div class='group_container col-sm-5'>
 				<button class='col-sm-12 add_group_button'>Add Group</button>
 				<input class='col-sm-12 hidden' type='text' id='group_name' placeholder='Enter Group Name'>
 			</div>
 			<div class='list_of_friends col-sm-6 col-sm-offset-1'></div>
-		</div>
+		</div> -->
       
     </div>
 

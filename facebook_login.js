@@ -33,27 +33,23 @@
       console.log('did back end log in?');
       promise_backend_login.then(testAPI());
 
-      $('#manage_circles_btn').click(function(){
-        console.log('in manage circles click handler');
+      promise_for_next_event_id =  
         $.ajax({
-          url:'get_friends.php',
-          dataType:'json',
-          data: {userId: current_user_id},
-          method: 'post',
-          success: function(response){
-            console.log('in response');
-            console.log(response);
+            url: 'get_event_id.php',
+            dataType: 'json',
+            data: {user_id : current_user_id},
+            method: 'post',
+            success: function(response){
+              console.log('in success');
+              console.log('response in getNextEventID: ', response);
+              next_event_id = response[0];
+            }
+        });
+     
+      // $('#manage_circles_btn').click(function(){
+      //   console.log('in manage circles click handler');
+     
 
-            displayFriends(response);
-
-           $('#invite_btn').click(function(){
-              console.log('invite button clicked');
-              sendInvites(event_object);
-             });
-
-          }
-        })
-      });
 
 
     } else if (response.status === 'not_authorized') {
@@ -67,6 +63,7 @@
         'into Facebook.';
     }
   }
+
 
   // This function is called when someone finishes with the Login
   // Button.  See the onlogin handler attached to it in the sample
@@ -126,6 +123,7 @@
 function displayFriends(arr){
 
       for(var i=0; i<arr.length; i++){
+        console.log('in displayFriends loop');
         var individual_friend = $('<div>',{
                                 class: 'individual_friend col-sm-12',
                                 id: 'individual_friend'+i,

@@ -6,6 +6,7 @@ span{
 	  height: 95vh;
 	  margin-top: 2vh;
 	  border: 1px solid black;
+	  position: absolute;
 }
 
 #generate_form input{
@@ -69,7 +70,7 @@ span{
 	height: 24vh;
 	border: 1px solid black;
 	border-radius: 5px;
-	overflow: hidden;
+	overflow: scroll;
 	box-shadow: 5px 5px 17px;
 	z-index:1;
 }
@@ -183,6 +184,7 @@ span{
 	border: 1px solid black;
 	margin-bottom: 1vh;
 	height: 10%;
+	overflow: scroll;
 }
 
 .venue_container{
@@ -214,5 +216,7 @@ span{
 	height:90%;
 }
 
-
+.event_details{
+	font-size: 70%;
+}
 
