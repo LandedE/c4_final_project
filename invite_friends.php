@@ -10,7 +10,20 @@
 	
 	$query = "INSERT INTO `Event Affiliates`(`User Id`, `Event ID`, `Invited User`) VALUES ";
  	
-	$num_of_invites = count($_POST['invitees']);
+	
+	
+	$invitees = [];
+	foreach($_POST['invitees'] as $val){
+		if(strlen($val)>0){
+
+			$invitees[] = $val;
+		};
+		
+	};
+	
+	print_r($invitees);
+
+$num_of_invites = count($invitees);
 
 
 	for($i=0; $i<$num_of_invites; $i++){
@@ -18,18 +31,18 @@
 			$values =  "(";
 			$values = $values.$_POST['user_id'].",";
 			$values = $values.$_POST['event_id'].",";
-			$values = $values.$_POST['invitees'][$i].")";
+			$values = $values.$invitees[$i].")";
 			$query = $query.$values;			
 		}else{
 			$values =  "(";
 			$values = $values.$_POST['user_id'].",";
 			$values = $values.$_POST['event_id'].",";
-			$values = $values.$_POST['invitees'][$i]."),";
+			$values = $values.$invitees[$i]."),";
 			$query = $query.$values;
 			};		
 	};
 	
-		
+	
 		
 	$result = mysqli_query($conn, $query);
 

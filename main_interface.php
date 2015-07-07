@@ -18,7 +18,7 @@
     var outing_results = [];
     var current_user_id;
     var event_object = {};
-    event_object['invitees'] = {};
+    event_object['invitees'] = [];
     var next_event_id;
     $(document).ready(function(){
    		
@@ -39,7 +39,7 @@
 
 
 function sendInvites(obj){
-    		if(obj.length ==0){
+    		if(obj.length == 0){
     			console.log('Please select friends to invite.')
     		}else {
     			$.ajax({
@@ -125,7 +125,7 @@ function sendInvites(obj){
    							$('.invitations_container').append(event_container);
 
    		
-					   		$('.invitations_container').on('click', '.event_container',function(){
+					   		event_container.on('click',function(){
 					   				console.log('clicked event_container');
 					   				console.log(this);
 					   				var event_id_to_show = $(this).attr('index_id');
@@ -218,6 +218,8 @@ function sendInvites(obj){
                           console.log('not connected');
                           $('#fb-login').toggleClass('hidden_button');
                           $('.logout_button').toggleClass('hidden_button');
+                          console.log('toggled hide on logout button');
+                          checkLoginState()
                          }  
 
                      });
@@ -276,8 +278,10 @@ function sendInvites(obj){
     				event_object['date'] = $('#week').val() +' ' + $('#day').val() + ':' + $('#hour').val() + 
     				':' + $('#minute').val() + ' ' + $('#day_night').val();
     				console.log(event_object);
-    				var promise = 
-						$.ajax({
+    				var promise_for_map = new Promise(function(resolve,reject){
+
+    				 
+						resolve($.ajax({
 							url: 'https://maps.googleapis.com/maps/api/geocode/json?address='+$('#location').val()+'&key=AIzaSyCQNq766unXxvfCp1ZJ-aMCIT8tMmglOlo',
 							method: 'Get',
 							dataType: 'json',
@@ -295,10 +299,10 @@ function sendInvites(obj){
 									console.log(city_coordinates);
 
 							}
-						})
-
+						}))
+					}) 
 					createCarousel();
-    				promise.then($.ajax({
+    				promise_for_map.then($.ajax({
     					url: 'gen_plan.php',
     					dataType: 'json',
     					data: {
@@ -446,6 +450,7 @@ function sendInvites(obj){
 			    	
     })
 })
+
 
 function createCarousel(){
 
@@ -803,11 +808,12 @@ function filterByDistance(center, outing, i, j){
 	<div id="main_interface_container" class="col-sm-8 col-sm-offset-2">
 		<div id='fb-login' class='col-sm-8 col-sm-offset-4'>
 				<div id='status'></div>
-				<fb:login-button class="login_button" scope="public_profile,email" onlogin="checkLoginState();">
+				<fb:login-button class="login_button" scope="public_profile,email,user_friends" onlogin="checkLoginState();">
 				</fb:login-button>
-				<button type='button' class='logout_button hidden_button'>Logout</button>
+				
 		</div>
-
+		<button type='button' class='logout_button hidden_button'>Logout</button>
+		
 		<button id ='set_plans_btn' type="button" class="col-sm-8 col-sm-offset-2">Give Me Plans</button>		
 
 		<button id='manage_circles_btn' class='col-sm-8 col-sm-offset-2'>Manage Friends</button>
@@ -887,6 +893,12 @@ function filterByDistance(center, outing, i, j){
 			<h3 class='col-sm-7 col-sm-offset-5'>Pending Invitations</h3>
 			<div class='invitations_container col-sm-5'></div>
 			<div class='details_of_event col-sm-6 col-sm-offset-1'></div>
+			<button class='col-sm-4 col-sm-offset-4 return_to_main_from_invitations'>Back To Main</button>
+        </div>
+
+
+        <div class="edit_profile col-sm-8 col-sm-offset-2 hidden">
+			<h3 class='col-sm-7 col-sm-offset-5'>Edit Profile</h3>
 			<button class='col-sm-4 col-sm-offset-4 return_to_main_from_invitations'>Back To Main</button>
         </div>
 

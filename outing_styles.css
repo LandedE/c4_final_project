@@ -220,3 +220,6 @@ span{
 	font-size: 70%;
 }
 
+#status{
+	display: none;
+}

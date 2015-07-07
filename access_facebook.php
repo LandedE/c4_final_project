@@ -30,7 +30,7 @@ if ($session) {
 	$response = $request->execute();
 	$graphObject = $response->getGraphObject();
 	print($graphObject->getProperty('name'));
-	var_dump($request);
+	var_dump($graphObject);
 	
 };
 

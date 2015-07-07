@@ -2,13 +2,15 @@
     
 
 
+    
+
 
 // This is called with the results from from FB.getLoginStatus().
   function statusChangeCallback(response) {
     console.log('about to test');
     console.log('statusChangeCallback');
     console.log(response);
-    current_user_id = response.authResponse.userID;
+    
     // The response object is returned with a status field that lets the
     // app know the current login status of the person.
     // Full docs on the response object can be found in the documentation
@@ -16,22 +18,45 @@
     
 
     if (response.status === 'connected') {
+      current_user_id = response.authResponse.userID;
       // Logged into your app and Facebook.
       $('#fb-login').toggleClass('hidden_button');
       $('.logout_button').toggleClass('hidden_button');
+      console.log('toggled hide on logout button');
       
-      var promise_backend_login = $.ajax({
-                          url: 'access_facebook.php',
-                          method: 'post',
-                          data: {token: response.authResponse.accessToken, userID: response.authResponse.userID},
-                          dataType: 'text',
-                          success: function(response){
-                            console.log('ajax call successful');
-                            console.log(response);
-                          }
-                  });
+      var promise_check_user = new Promise(function(resolve, reject){
+                      resolve($.ajax({
+                                    url: 'check_for_new_user.php',
+                                    data:{user_id: current_user_id, token: response.authResponse.accessToken},
+                                    dataType: 'text',
+                                    method: 'post',
+                                    success: function(response){
+                                      console.log('in promise check user success function');
+                                      console.log('response: ', response);
+
+                                    }
+                              }));
+
+      })
+
+        
+
+      var promise_backend_login = new Promise(function(resolve, reject){
+                        resolve($.ajax({
+                                          url: 'access_facebook.php',
+                                          method: 'post',
+                                          data: {token: response.authResponse.accessToken, userID: response.authResponse.userID},
+                                          dataType: 'text',
+                                          success: function(response){
+                                            console.log('ajax call successful');
+                                            console.log(response);
+                                          }
+                                  }));
+      })
+
+                      
       console.log('did back end log in?');
-      promise_backend_login.then(testAPI());
+      promise_check_user.then(promise_backend_login).then(testAPI());
 
       promise_for_next_event_id =  
         $.ajax({
@@ -46,17 +71,19 @@
             }
         });
      
-      // $('#manage_circles_btn').click(function(){
+      // $('#manage_circles_btn').click(function(){u
       //   console.log('in manage circles click handler');
      
 
 
 
     } else if (response.status === 'not_authorized') {
+      current_user_id = null;
       // The person is logged into Facebook, but not your app.
       document.getElementById('status').innerHTML = 'Please log ' +
         'into this app.';
     } else {
+      current_user_id = null;
       // The person is not logged into Facebook, so we're not sure if
       // they are logged into this app or not.
       document.getElementById('status').innerHTML = 'Please log ' +
@@ -116,7 +143,9 @@
       console.log('Successful login for: ' + response.name);
       document.getElementById('status').innerHTML =
         'Thanks for logging in, ' + response.name + '!';
+
     });
+
   }
 
 
@@ -179,10 +208,11 @@ function displayFriends(arr){
             event_object['user_id'] = current_user_id;
             console.log(event_object);
             
-           
+          
             console.log(this.checked);
             if(this.checked){
                event_object.invitees[$(this).attr('index_id')] = $(this).attr('userid');
+              // [$(this).attr('index_id')]
               console.log(event_object);
             }else{
               console.log('in delete');
