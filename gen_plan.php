@@ -31,10 +31,12 @@ $TOKEN = 'KoXIbe2lso3bifg1NuByim7VwRbIxptJ';
 $TOKEN_SECRET = 'gSQdI4sXuo77ltfjGf8WfBNI8sE';
 $API_HOST = 'api.yelp.com';
 $DEFAULT_TERM = 'dinner';
-$DEFAULT_LOCATION = 'Irvine, CA';
+$DEFAULT_LOCATION = 'Redlands';
+$DEFAULT_COORDINATES = null;
 $SEARCH_LIMIT = 20;
 $SEARCH_PATH = '/v2/search/';
 $BUSINESS_PATH = '/v2/business/';
+
 /** 
  * Makes a request to the Yelp API and returns the response
  * 
@@ -83,7 +85,11 @@ function search($term, $location) {
     $url_params = array();
     
     $url_params['term'] = $term ?: $GLOBALS['DEFAULT_TERM'];
+    
     $url_params['location'] = $location?: $GLOBALS['DEFAULT_LOCATION'];
+    if(isset($_POST['location']['coordinates'])){
+        $url_params['cll'] = $_POST['location']['coordinates'];
+    };
     $url_params['limit'] = $GLOBALS['SEARCH_LIMIT'];
     $search_path = $GLOBALS['SEARCH_PATH'] . "?" . http_build_query($url_params);
     
@@ -168,7 +174,7 @@ function query_api($term, $location) {
     // var_dump($new_business);
     // $new_business;
     
-}
+    }
     return $array_of_results;
     // $response = get_business($business_id);
     
@@ -195,7 +201,7 @@ for($i=0; $i<$num_params; $i++){
         continue;
     }
         $DEFAULT_LOCATION = $_POST['location']['city'];
-        $DEFAULT_TERM=$_POST[$i];
+        $DEFAULT_TERM = $_POST[$i];
         $all_results[$i] = query_api($term, $location);
          
 };
