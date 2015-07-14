@@ -1,5 +1,4 @@
 
-    
 
 
     
@@ -34,13 +33,10 @@
                                       console.log('in promise check user success function');
                                       console.log('response: ', response);
 
-                                    }
+                                    },
                               }));
 
-      })
-
-        
-
+      });
       var promise_backend_login = new Promise(function(resolve, reject){
                         resolve($.ajax({
                                           url: 'access_facebook.php',
@@ -50,16 +46,14 @@
                                           success: function(response){
                                             console.log('ajax call successful');
                                             console.log(response);
-                                          }
+                                          },
                                   }));
-      })
-
-                      
+      });                      
       console.log('did back end log in?');
-      promise_check_user.then(promise_backend_login).then(testAPI());
-
-      promise_for_next_event_id =  
-        $.ajax({
+      var promise_for_next_event_id = new Promise(function(resolve, reject){  
+        console.log('in promise for next event id');
+        resolve(
+          $.ajax({
             url: 'get_event_id.php',
             dataType: 'json',
             data: {user_id : current_user_id},
@@ -68,8 +62,14 @@
               console.log('in success');
               console.log('response in getNextEventID: ', response);
               next_event_id = response[0];
-            }
-        });
+            },
+        }));
+      });
+    
+      promise_check_user.then(promise_backend_login).then(promise_for_next_event_id).then(testAPI());
+
+     
+
      
       // $('#manage_circles_btn').click(function(){u
       //   console.log('in manage circles click handler');
