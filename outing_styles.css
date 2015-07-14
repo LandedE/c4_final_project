@@ -7,7 +7,7 @@ span{
 	  margin-top: 2vh;
 	  border: 1px solid black;
 	  position: absolute;
-	  
+
 }
 
 #generate_form input{
@@ -229,4 +229,8 @@ span{
 
 #status{
 	display: none;
+}
+
+.use_my_location{
+	margin-top: 8vh;
 }

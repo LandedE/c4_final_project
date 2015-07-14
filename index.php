@@ -40,7 +40,8 @@
        		<input type='text' value='drinks' class='col-sm-12 search_parameters' id='search_param2' name='search_param2' placeholder='Enter second stop i.e. "Bars"'>
        		<input type='text' value='club' class='col-sm-12  search_parameters' id='search_param3' name='search_param3' placeholder='Enter third stop i.e. "Club"'>
        		<input type='text'  value='Redlands' class='col-sm-8 search_parameters' id='location' name='location' placeholder='Enter desired location.'>
-       		<button type='button' class='col-sm-4' name='coordinates' id='coordinates'>Find Me</button>
+       		<span class='col-sm-1 use_my_location'>Use My Location: </span>
+       		<input type='checkbox' class='col-sm-1' name='coordinates'  id='use_my_location'>
        		<h5 class='col-sm-8 col-sm-offset-4'>Set Time:</h5>
        		<select class='col-sm-3' name="Week" id="week">
 			  <option value="This Week">This Week</option>

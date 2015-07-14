@@ -1,4 +1,5 @@
 <?php
+
 $num_params = (count($_POST)-1);
 $all_results= array();
 // var_dump($_POST);
@@ -33,7 +34,7 @@ $API_HOST = 'api.yelp.com';
 $DEFAULT_TERM = 'dinner';
 $DEFAULT_LOCATION = 'Redlands';
 $DEFAULT_COORDINATES = null;
-$SEARCH_LIMIT = 20;
+$SEARCH_LIMIT = 10;
 $SEARCH_PATH = '/v2/search/';
 $BUSINESS_PATH = '/v2/business/';
 
@@ -87,13 +88,15 @@ function search($term, $location) {
     $url_params['term'] = $term ?: $GLOBALS['DEFAULT_TERM'];
     
     $url_params['location'] = $location?: $GLOBALS['DEFAULT_LOCATION'];
-    if(isset($_POST['location']['coordinates'])){
+    if($_POST['location']['coordinates'] !== ''){
         $url_params['cll'] = $_POST['location']['coordinates'];
     };
+
     $url_params['limit'] = $GLOBALS['SEARCH_LIMIT'];
     $search_path = $GLOBALS['SEARCH_PATH'] . "?" . http_build_query($url_params);
-    
+     
     return request($GLOBALS['API_HOST'], $search_path);
+
 }
 /**
  * Query the Business API by business_id

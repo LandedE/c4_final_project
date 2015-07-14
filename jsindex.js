@@ -12,6 +12,7 @@
 		getLocation();
 		makeNavigation();
 		
+		
     
 	});
    
@@ -100,17 +101,28 @@ function createDescriptionText(eventData){
 
 
 					});
+
+					var website_link = $('<a>',{
+						href:event_array[index_to_generate].url,
+						target: '_blank',
+					});
+
+					
+
 					var yelp_image = $('<img>',{
 										src: event_array[index_to_generate].image_url,
 										class:'result_images col-sm-12',
 
 					});
 
+					
+
 					var event_title = $('<h5>',{
 										class: 'col-sm-12',
 										text: event_array[index_to_generate].name,
 
 					});
+					website_link.append(event_title);
 
 					var description_span = $('<span>',{
 										class: 'col-sm-12 description_span',
@@ -155,7 +167,7 @@ function createDescriptionText(eventData){
 										
 					});
 					
-					info_container.append(yelp_image, event_title, description_span, price_span, rate_span, review_count_span, hours_op_span, distance_span, phone_span, swap_button);
+					info_container.append(yelp_image, website_link, description_span, price_span, rate_span, review_count_span, hours_op_span, distance_span, phone_span, swap_button);
 					if(index_to_generate==0){
 					info_container.addClass('current_event');
 					}else{
@@ -175,9 +187,10 @@ function createDescriptionText(eventData){
 						
 						$(outing_results[index_to_get][0]).remove();
 						
-						outing_results[index_to_get];
+						
 
 						generateEventInfo(index_to_get);
+						outing_results[index_to_get].addClass('current_event');
 						console.log($(outing_results[index_to_get][0]));
 						
 						console.log(outing_results[index_to_get][0]);
@@ -245,13 +258,18 @@ function createDescriptionText(eventData){
 							createDescriptionText(event_array[i]);
 						};
 
-						console.log(event_array);
+						console.log(event_array);	
 						promise_for_map.then(initialize());
 					},
 				});	
 			};
 
 			function getPlans(){
+				console.log('in get plans');
+				var coordinates = null;
+				if($('.use_my_location').val()==1){
+					coordinates = ''+current_location.lat+','+current_location.lng;
+				};
     				$.ajax({
     					url: 'gen_plan.php',
     					dataType: 'json',
@@ -261,7 +279,7 @@ function createDescriptionText(eventData){
     						2: $('#search_param3').val(), 
     						location: {
     							city: $('#location').val(),
-    							coordinates: '33.6694, -117.8231',
+    							coordinates: coordinates,
     						},
     					},
     					method: 'POST',
@@ -671,16 +689,19 @@ function createDescriptionText(eventData){
 
 
 function createEventElements(eventData){
-
+	console.log('in create event elements');
 	var info_container = $('<div>',{
 							class:'row outing_container col-sm-4 col-sm-offset-4',
 							index_id: eventData.index,
 						});
 
+	
 	var yelp_image = $('<img>',{
 							src: eventData.image_url,
 							class:'result_images col-sm-12',
-						});
+	});
+
+	
 
 	var event_title = $('<h5>',{
 						class: 'col-sm-12',
