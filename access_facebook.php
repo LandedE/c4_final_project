@@ -36,18 +36,20 @@ if ($session) {
   // print_r($std_class_data);
   $std_class_data_arr = (array) $std_class_data;
   print_r($std_class_data_arr);
-  print_r($_POST['userID']);
+ 
 };
 
 // $conn = mysqli_connect("localhost","root","password","Roam");
 
-// $query = "INSERT INTO `User Friends`(`UserId`, `FriendID`) VALUES "; 
+$query = "INSERT INTO `User Friends`(`UserId`, `FriendID`) VALUES "; 
 
-// $values = "($_POST[userID]".$std_class_data['id'];
+$values = "(".$_POST['userID'].','.$std_class_data_arr['id'].")";
 
-// $query .= $values;
+$query .= $values;
 
-// print($query);
+
+
+print($query);
 
 // $result = mysqli_query($conn, $query);
 
