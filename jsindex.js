@@ -272,7 +272,7 @@ function createDescriptionText(eventData){
 				};
     				$.ajax({
     					url: 'gen_plan.php',
-    					dataType: 'json',
+    					dataType: 'text',
     					data: {
     						0: $('#search_param1').val(),
     						1: $('#search_param2').val(),
