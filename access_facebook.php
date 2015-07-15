@@ -32,7 +32,8 @@ if ($session) {
 	
 	var_dump($graphObject);
   $array_of_friend = $graphObject -> asArray();
-  print_r($array_of_friend['data'][0]);
+  $std_class_data = $array_of_friend['data'][0];
+  print_r(json_decode($std_class_data, true));
 
   
 
