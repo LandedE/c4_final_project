@@ -26,10 +26,10 @@ require_once('lib/OAuth.php');
 // Set your OAuth credentials here  
 // These credentials can be obtained from the 'Manage API Access' page in the
 // developers documentation (http://www.yelp.com/developers)
-$CONSUMER_KEY = 'uxIopDp70KRjcH6oUaeV0g';
-$CONSUMER_SECRET = 'hUfGOs18uJ5I-zxPhuFYgJOJNLA';
-$TOKEN = 'KoXIbe2lso3bifg1NuByim7VwRbIxptJ';
-$TOKEN_SECRET = 'gSQdI4sXuo77ltfjGf8WfBNI8sE';
+$CONSUMER_KEY = '7vgQzif6o95bcvM28skxcw';
+$CONSUMER_SECRET = '54CPSG1ziD9qbcOEhiy2KEyYUv4';
+$TOKEN = 'yWaXnF0tv9MwEFUyLelD_xbnoof8aOom';
+$TOKEN_SECRET = 'QQ0TMavmzWVZoQCll0988QZh3i8';
 $API_HOST = 'api.yelp.com';
 $DEFAULT_TERM = 'dinner';
 $DEFAULT_LOCATION = 'Redlands';
