@@ -31,7 +31,9 @@ if ($session) {
 	$graphObject = $response->getGraphObject();
 	
 	var_dump($graphObject);
-  var_dump($graphObject -> asArray());
+  $array_of_friend = $graphObject -> asArray());
+  print_r($array_of_friend['data'][0]);
+
   
 
 	
