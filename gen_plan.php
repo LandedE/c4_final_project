@@ -29,7 +29,7 @@ require_once('lib/OAuth.php');
 $CONSUMER_KEY = '7vgQzif6o95bcvM28skxcw';
 $CONSUMER_SECRET = '54CPSG1ziD9qbcOEhiy2KEyYUv4';
 $TOKEN = 'yWaXnF0tv9MwEFUyLelD_xbnoof8aOom';
-$TOKEN_SECRET = 'QQ0TMavmzWVZoQCll0988QZh3i8-p';
+$TOKEN_SECRET = 'QQ0TMavmzWVZoQCll0988QZh3i8';
 $API_HOST = 'api.yelp.com';
 $DEFAULT_TERM = 'dinner';
 $DEFAULT_LOCATION = 'Redlands';
@@ -94,7 +94,7 @@ function search($term, $location) {
 
     $url_params['limit'] = $GLOBALS['SEARCH_LIMIT'];
     $search_path = $GLOBALS['SEARCH_PATH'] . "?" . http_build_query($url_params);
-    print_r($search_path);
+    
     return request($GLOBALS['API_HOST'], $search_path);
 
 }
