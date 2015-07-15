@@ -36,7 +36,7 @@ if ($session) {
   $std_class_data = $array_of_friends['data'];
   $data_length = count($std_class_data);
   for($i=0; $i<$data_length;$i++){
-    $std_class_data_arr = (array) $std_class_data;
+    $std_class_data_arr = (array) $std_class_data[$i];
     $array_of_friend_data[] = $std_class_data_arr;
   };
   // print_r($std_class_data);
