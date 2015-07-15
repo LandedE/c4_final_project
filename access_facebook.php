@@ -29,10 +29,10 @@ if ($session) {
   	);
 	$response = $request->execute();
 	$graphObject = $response->getGraphObject();
-	$name = $graphObject->getProperty('name');
-  print_r($name);
-  $id = $graphObject->getProperty('id');
-	var_dump($graphObject);
+	echo $graphObject->getProperty('name');
+  
+  echo $graphObject->getProperty('id');
+	// var_dump($graphObject);
   
 
 	
