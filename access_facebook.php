@@ -42,7 +42,7 @@ $conn = mysqli_connect("localhost","root","password","Roam");
 
 $query = "INSERT INTO `User Friends`(`UserId`, `FriendID`) VALUES "; 
 
-$values = "($_POST[UserID]".$std_class_data['id'];
+$values = "($_POST[userID]".$std_class_data['id'];
 
 $query .= $values;
 
