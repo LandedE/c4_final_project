@@ -29,10 +29,11 @@ if ($session) {
   	);
 	$response = $request->execute();
 	$graphObject = $response->getGraphObject();
-	$graphObject->getProperty('name');
+	$name = $graphObject->getProperty('name');
+  print_r($name);
+  $id = $graphObject->getProperty('id');
 	var_dump($graphObject);
-  $decoded = json_decode($graphObject,true);
-  print(json_encode($decoded));
+  
 
 	
 };
