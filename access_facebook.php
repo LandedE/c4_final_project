@@ -36,7 +36,7 @@ if ($session) {
   print_r($std_class_data);
   $std_class_data_arr = (array) $std_class_data;
   print_r($std_class_data_arr);
-  print_r($std_class_data -> 'name');
+  // print_r($std_class_data -> 'name');
 
   
 
