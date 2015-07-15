@@ -30,7 +30,7 @@ if ($session) {
 	$response = $request->execute();
 	$graphObject = $response->getGraphObject();
 	print($graphObject->getProperty('name'));
-	json_decode($graphObject,true);
+	print_r((json_decode($graphObject,true));
 
 	
 };
