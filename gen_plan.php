@@ -94,7 +94,7 @@ function search($term, $location) {
 
     $url_params['limit'] = $GLOBALS['SEARCH_LIMIT'];
     $search_path = $GLOBALS['SEARCH_PATH'] . "?" . http_build_query($url_params);
-     
+    print_r($search_path);
     return request($GLOBALS['API_HOST'], $search_path);
 
 }
