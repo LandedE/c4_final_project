@@ -33,17 +33,28 @@ if ($session) {
 	var_dump($graphObject);
   $array_of_friend = $graphObject -> asArray();
   $std_class_data = $array_of_friend['data'][0];
-  print_r($std_class_data);
+  // print_r($std_class_data);
   $std_class_data_arr = (array) $std_class_data;
   print_r($std_class_data_arr);
-  // print_r($std_class_data -> 'name');
 
+};
+$conn = mysqli_connect("localhost","root","password","Roam");
+
+$query = "INSERT INTO `User Friends`(`UserId`, `FriendID`) VALUES "; 
+
+$values = "($_POST[UserID]".$std_class_data['id'];
+
+$query .= $values;
+
+print($query);
+
+// $result = mysqli_query($conn, $query);
+
+// $rows = mysqli_num_rows($result);
   
 
-	
-};
 
-// Add `use Facebook\FacebookSession;` to top of file
-// print("<br>");
-// var_dump($session);
+
+
+
 ?>
