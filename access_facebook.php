@@ -29,10 +29,9 @@ if ($session) {
   	);
 	$response = $request->execute();
 	$graphObject = $response->getGraphObject();
-	echo $graphObject->getProperty('name');
-  
-  echo $graphObject->getProperty('id');
-	// var_dump($graphObject);
+	
+	var_dump($graphObject);
+  var_dump($graphObject -> asArray());
   
 
 	
