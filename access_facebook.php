@@ -29,8 +29,8 @@ if ($session) {
   	);
 	$response = $request->execute();
 	$graphObject = $response->getGraphObject();
-	print($graphObject->getProperty('name'));
-	print_r((json_decode($graphObject,true));
+	$graphObject->getProperty('name');
+	
 
 	
 };
