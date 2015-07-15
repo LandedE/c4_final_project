@@ -2,7 +2,7 @@
  
 
 
-$conn = mysqli_connect("localhost","root","","Roam");
+$conn = mysqli_connect("localhost","root","password","Roam");
 
 $query = "SELECT * FROM `Event Affiliates` WHERE `Invited User` = $_POST[user_id]";
 

@@ -1,5 +1,5 @@
 <?php
-$conn = mysqli_connect("localhost","root","","Roam");
+$conn = mysqli_connect("localhost","root","password","Roam");
 $query_for_event_ids = "SELECT `Event ID` FROM `Event Affiliates` WHERE `User Id` = $_POST[user_id]";
 $result = mysqli_query($conn, $query_for_event_ids);
 if(mysqli_num_rows($result) > 0 ){

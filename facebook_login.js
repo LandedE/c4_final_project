@@ -18,6 +18,7 @@
 
     if (response.status === 'connected') {
       current_user_id = response.authResponse.userID;
+      console.log(current_user_id);
       // Logged into your app and Facebook.
       $('#fb-login').toggleClass('hidden_button');
       $('.logout_button').toggleClass('hidden_button');

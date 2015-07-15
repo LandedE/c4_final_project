@@ -29,7 +29,7 @@ require_once('lib/OAuth.php');
 $CONSUMER_KEY = '7vgQzif6o95bcvM28skxcw';
 $CONSUMER_SECRET = '54CPSG1ziD9qbcOEhiy2KEyYUv4';
 $TOKEN = 'yWaXnF0tv9MwEFUyLelD_xbnoof8aOom';
-$TOKEN_SECRET = 'QQ0TMavmzWVZoQCll0988QZh3i8';
+$TOKEN_SECRET = 'QQ0TMavmzWVZoQCll0988QZh3i8-p';
 $API_HOST = 'api.yelp.com';
 $DEFAULT_TERM = 'dinner';
 $DEFAULT_LOCATION = 'Redlands';

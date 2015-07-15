@@ -1,7 +1,7 @@
 <?php
 
 // var_dump($_POST);
-$conn = mysqli_connect("localhost","root","","Roam");
+$conn = mysqli_connect("localhost","root","password","Roam");
 
 $query = "SELECT * FROM `User Friends` WHERE `UserId` = $_POST[userId]";
 

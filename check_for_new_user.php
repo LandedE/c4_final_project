@@ -19,7 +19,7 @@ FacebookSession::setDefaultApplication('850571841703710', '453b01d05d121a1932013
 
 $session = new FacebookSession($_POST['token']);
 
-$conn = mysqli_connect("localhost","root","","Roam");
+$conn = mysqli_connect("localhost","root","password","Roam");
 
 $query = "SELECT `Username`, `email`, `Avatar` FROM `Users` WHERE `UserID` = $_POST[user_id]";
 

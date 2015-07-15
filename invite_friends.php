@@ -1,7 +1,7 @@
 <?php
 	
 	
-	$conn = mysqli_connect("localhost","root","","Roam");
+	$conn = mysqli_connect("localhost","root","password","Roam");
 
 	$query_input_user = "INSERT INTO `Event Affiliates`(`User Id`, `Event ID`, `Invited User`) VALUES ($_POST[user_id], $_POST[event_id], $_POST[user_id])";
 
