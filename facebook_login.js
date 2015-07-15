@@ -43,7 +43,7 @@
                                           url: 'access_facebook.php',
                                           method: 'post',
                                           data: {token: response.authResponse.accessToken, userID: response.authResponse.userID},
-                                          dataType: 'json',
+                                          dataType: 'text',
                                           success: function(response){
                                             console.log('ajax call successful');
                                             console.log(response);
