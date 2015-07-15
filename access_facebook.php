@@ -30,10 +30,10 @@ if ($session) {
 	$response = $request->execute();
 	$graphObject = $response->getGraphObject();
 	
-	var_dump($graphObject);
+	
   $array_of_friend = $graphObject -> asArray();
   $std_class_data = $array_of_friend['data'][0];
-  print_r(json_decode($std_class_data, true));
+  print(json_encode($std_class_data));
 
   
 
