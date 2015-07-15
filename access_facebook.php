@@ -34,9 +34,12 @@ if ($session) {
   $array_of_friends = $graphObject -> asArray();
   $array_of_friend_data = [];
   $std_class_data = $array_of_friends['data'];
+  print_r($std_class_data);
   $data_length = count($std_class_data);
-  for($i=0; $i<$data_length;$i++){
+  print($data_length);
+  for($i=0;$i<$data_length;$i++){
     $std_class_data_arr = (array) $std_class_data[$i];
+    print_r($std_class_data_arr);
     $array_of_friend_data[] = $std_class_data_arr;
   };
   // print_r($std_class_data);
