@@ -42,13 +42,27 @@ if ($session) {
     print_r($std_class_data_arr);
     $array_of_friend_data[] = $std_class_data_arr;
   };
-  // print_r($std_class_data);
+ 
   
   print_r($array_of_friend_data);
+  $array_of_friend_data_length = count($array_of_friend_data);
+  $array_of_friend_ids = [];
+  for($i=0; $i<$array_of_friend_data_length;$i++){
+    $array_of_friend_ids[] = $array_of_friend_data[$i]['id'];
+  };
  
-};
 
-// $conn = mysqli_connect("localhost","root","password","Roam");
+
+$conn = mysqli_connect("localhost","root","password","Roam");
+
+for($i=0;$i<count($array_of_friend_ids);$i++){
+
+  $check_if_friend_query = "SELECT `UserId`, `FriendID` FROM `User Friends` WHERE `UserId` = ". $_POST['userID'] ."&& `FriendID` =".$array_of_friend_ids[$i];
+  $result = mysqli_query($conn, $check_if_friend_query);
+  $rows = mysqli_num_rows($result);
+  print_r($rows);
+
+};
 
 // $query = "INSERT INTO `User Friends`(`UserId`, `FriendID`) VALUES "; 
 
@@ -64,7 +78,7 @@ if ($session) {
 
 // $rows = mysqli_num_rows($result);
   
-
+};
 
 
 
