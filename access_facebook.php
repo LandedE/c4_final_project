@@ -44,7 +44,7 @@ if ($session) {
   };
   // print_r($std_class_data);
   
-  print_r($std_class_data_arr);
+  print_r($array_of_friend_data);
  
 };
 
