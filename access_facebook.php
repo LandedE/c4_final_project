@@ -61,8 +61,11 @@ for($i=0;$i<count($array_of_friend_ids);$i++){
   print_r($check_if_friend_query);
   $result = mysqli_query($conn, $check_if_friend_query);
   $rows = mysqli_num_rows($result);
-  if($rows==0){
+  print($rows);
+  if($rows == 0){
+    print('in if statement rows == 0');
     $insert_friend_query = "INSERT INTO `User Friends`(`UserId`, `FriendID`) VALUES "."(".$_POST['userID'].','.$array_of_friend_ids[$i].")";
+    print($insert_friend_query);
     $result = mysqli_query($conn, $insert_friend_query);
     print(mysqli_affected_rows($result));
 
