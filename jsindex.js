@@ -555,7 +555,7 @@ function createDescriptionText(eventData){
   			
 
     	function createEventDiv(event_of_venues){
-    		
+    						console.log(event_of_venues);
     						var event_container = $('<div>',{
    													class:'col-sm-12 event_container',
    													index_id: event_of_venues[0]['Outing ID'],
