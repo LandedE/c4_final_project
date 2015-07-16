@@ -572,6 +572,7 @@ function createDescriptionText(eventData){
 
    							event_container.append(event_owner_pic, event_owner_name);
    							for(var i=0; i<event_of_venues.length; i++){
+   								console.log(event_of_venues[i].VenueJson.name +': ' +event_of_venues[i].EventDetails);
    								var event_description_span = $('<span>',{
    													class: 'col-sm-10 venues_description_span',
    													text: i+1+": " +event_of_venues[i].VenueJson.name +': ' +event_of_venues[i].EventDetails,  													
