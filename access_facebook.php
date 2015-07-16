@@ -58,6 +58,7 @@ $conn = mysqli_connect("localhost","root","password","Roam");
 for($i=0;$i<count($array_of_friend_ids);$i++){
 
   $check_if_friend_query = "SELECT `UserId`, `FriendID` FROM `User Friends` WHERE `UserId` = ". $_POST['userID'] ."&& `FriendID` =".$array_of_friend_ids[$i];
+  print_r($check_if_friend_query);
   $result = mysqli_query($conn, $check_if_friend_query);
   $rows = mysqli_num_rows($result);
   print_r($rows);
