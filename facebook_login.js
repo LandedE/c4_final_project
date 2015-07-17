@@ -19,7 +19,17 @@
     if (response.status === 'connected') {
       current_user_id = response.authResponse.userID;
       console.log(current_user_id);
+
+      $('.window_image').animate({
+                          position: 'absolute',
+                          height: '150vh',
+                          top: '-13vh',
+                          left: '-39.5vw',
+                          width: '147vw',
+      },1000);
       // Logged into your app and Facebook.
+      $('.landing_page').toggleClass('hidden');
+      $('#main_interface_container').toggleClass('hidden');
       $('#fb-login').toggleClass('hidden_button');
       $('.logout_button').toggleClass('hidden_button');
       console.log('toggled hide on logout button');

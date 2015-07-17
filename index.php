@@ -14,18 +14,27 @@
 </head>
 
 <body>
-	<div id="main_interface_container" class="col-sm-8 col-sm-offset-2">
-		<div id='fb-login' class='col-sm-8 col-sm-offset-4'>
+
+<div class='landing_page col-sm-8 col-sm-offset-2'> 
+	<h1 class='app_title'>Roam</h1>
+	<h6 class='copy'>It's a big world...</h6>	
+	<img src="images/window_picture.jpg" class='window_image'>
+	<div id='fb-login' class='col-sm-8 col-sm-offset-4'>
 				<div id='status'></div>
-				<fb:login-button class="login_button" scope="public_profile,email,user_friends" onlogin="checkLoginState();">
+				<fb:login-button class="login_button" data-size="xlarge" scope="public_profile,email,user_friends" onlogin="checkLoginState();">
 				</fb:login-button>
+				
 				
 		</div>
 		<button type='button' class='logout_button hidden_button'>Logout</button>
-		
-		<button id ='set_plans_btn' type="button" class="col-sm-8 col-sm-offset-2">Give Me Plans</button>		
+</div>	
 
-		<button id='manage_circles_btn' class='col-sm-8 col-sm-offset-2'>Manage Friends</button>
+	<div id="main_interface_container" class="col-sm-8 col-sm-offset-2 hidden">
+		<img src='images/window_picture.jpg' class='window_image'>
+		
+		<button id ='set_plans_btn' type="button" class="col-sm-8 col-sm-offset-2">Roam</button>		
+
+		<button id='manage_circles_btn' class='col-sm-8 col-sm-offset-2'>Friends</button>
 		
 		<button id='get_invites_btn' class='col-sm-8 col-sm-offset-2'>Pending Events</button>
 		

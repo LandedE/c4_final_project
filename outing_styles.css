@@ -1,12 +1,13 @@
 span{
 	font-size: 80%;
 }
-#main_interface_container, #plans-container, .plan-results, .login-page, .friend-page, .pending_invitations, .manage_circles{
+#main_interface_container, #plans-container, .plan-results, .login-page, .friend-page, .pending_invitations, .manage_circles, .landing_page{
 	  border-radius: 5px;
 	  height: 95vh;
 	  margin-top: 2vh;
 	  border: 1px solid black;
 	  position: absolute;
+	  overflow: hidden;
 
 }
 
@@ -17,28 +18,49 @@ span{
 }
 
 #set_plans_btn{
-	border-radius: 5px;
-	color:white;
-	height: 20%;
-	margin-top: 7%;
-	border: 1px solid black;
-	background-color: #0F4719;
+  border-radius: 5px;
+  color: white;
+  height: 13%;
+  width: 17vw;
+  margin-top: 7%;
+  border: 1px solid black;
+  background-color: #00688B;
+  font-size: 5vh;
+  top: 20vh;
+  left: 13vw;
+  opacity: .78;
+   box-shadow: 6px 7px 6px black;
+   font-family: cursive;
 }
 
 #manage_circles_btn{
-	border-radius: 5px;
-	height: 20%;
-	margin-top: 7%;
-	border: 1px solid black;
-	background-color: #0F2B3B;
+	  border-radius: 5px;
+  color: white;
+  height: 13%;
+  width: 17vw;
+  margin-top: 7%;
+  border: 1px solid black;
+  background-color: #337147;
+  font-size: 5vh;
+  top: 58vh;
+  opacity: .78;
+  box-shadow: 6px 7px 6px black;
+  font-family: cursive;
 }
 
 #get_invites_btn{
-	border-radius: 5px;
-	height: 20%;
-	margin-top: 7%;
-	border: 1px solid black;
-	background-color: #999149;
+  border-radius: 5px;
+  color: white;
+  height: 13%;
+  width: 17vw;
+  margin-top: 7%;
+  border: 1px solid black;
+  background-color: #337147;
+  font-size: 5vh;
+  top: 35vh;
+  opacity: .78;
+  box-shadow: 6px 7px 6px black;
+  font-family: cursive;
 }
 
 .search_parameters{
@@ -233,4 +255,46 @@ span{
 
 .use_my_location{
 	margin-top: 8vh;
+}
+
+.window_image{
+  height: 63vh;
+  width: 51vw;
+  position: absolute;
+  top: 13vh;
+  left: 7vw;
+  border: 1px solid black;
+  border-radius: 5px;
+}
+
+.login_button{
+  position: relative;
+  top: 18vh;
+  left: 6vw;
+}
+
+.app_title{
+	font-family:cursive;
+	position:absolute;
+	left: 27vw;
+  	font-size: 11vh;
+}
+
+.copy{
+  text-shadow: 2px 2px black;
+  position: absolute;
+  left: 25vw;
+  top: 43vh;
+  z-index: 1;
+  color: white;
+  font-size: 5vh;
+  font-family: cursive;
+}
+
+.main_interface_picture{
+  position: absolute;
+  height: 150vh;
+  top: -13vh;
+  right: -39.5vw;
+  width: 147vw;
 }

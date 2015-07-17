@@ -11,9 +11,6 @@
     $(document).ready(function(){
 		getLocation();
 		makeNavigation();
-		
-		
-    
 	});
    
 
