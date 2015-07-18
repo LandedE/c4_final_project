@@ -93,7 +93,7 @@ function createDescriptionText(eventData){
 					description_text = description_text.substr(0,description_text.length-2);
 					
 					var info_container = $('<div>',{
-										class:'row outing_container col-sm-4 col-sm-offset-4',
+										class:'row outing_container open_event col-sm-4 col-sm-offset-4',
 										index_id: index_to_generate,
 
 
@@ -173,9 +173,9 @@ function createDescriptionText(eventData){
 					outing_results[index_to_generate] = (info_container);
 					
 					$('.center_stage').append(info_container);
-					$(outing_results[index_to_generate]).click(function(){
-								$(outing_results[index_to_generate]).toggleClass('open_event');
-						});
+					// $(outing_results[index_to_generate]).click(function(){
+					// 			$(outing_results[index_to_generate]).toggleClass('open_event');
+					// 	});
 					$('.swap_button').click(function(){
 						
 						index_to_get = $(this).attr('index_id');

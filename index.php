@@ -15,10 +15,10 @@
 
 <body>
 
-<div class='landing_page col-sm-8 col-sm-offset-2'> 
+<div class='landing_page col-xs-12 col-sm-8 col-sm-offset-2'> 
 	<h1 class='app_title'>Roam</h1>
 	<h6 class='copy'>It's a big world...</h6>	
-	<img src="images/window_picture.jpg" class='window_image'>
+	<img src="images/window_picture.jpg" class='window_image col-xs-12'>
 	<div id='fb-login' class='col-sm-8 col-sm-offset-4'>
 				<div id='status'></div>
 				<fb:login-button class="login_button" data-size="xlarge" scope="public_profile,email,user_friends" onlogin="checkLoginState();">
@@ -41,58 +41,64 @@
 	</div>
 	
 	<div id="plans-container" class="col-sm-8 col-sm-offset-2 hidden">
+		<img src='images/birds-eye.jpg' class='main_interface_background col-sm-12'>
 		<div class="plan-form">
-
-			<h3 class='col-sm-4 col-sm-offset-4'>Set Plan Details</h3>
-			 <form class ='col-sm-10 col-sm-offset-1' id='generate_form'>
-       		<input type='text' value='dinner' class='col-sm-12  search_parameters' id='search_param1' name='search_param1' placeholder='Enter first stop i.e. "Restaurant"'>
-       		<input type='text' value='drinks' class='col-sm-12 search_parameters' id='search_param2' name='search_param2' placeholder='Enter second stop i.e. "Bars"'>
-       		<input type='text' value='club' class='col-sm-12  search_parameters' id='search_param3' name='search_param3' placeholder='Enter third stop i.e. "Club"'>
-       		<input type='text'  value='Redlands' class='col-sm-8 search_parameters' id='location' name='location' placeholder='Enter desired location.'>
-       		<span class='col-sm-1 use_my_location'>Use My Location: </span>
-       		<input type='checkbox' class='col-sm-1' name='coordinates'  id='use_my_location'>
-       		<h5 class='col-sm-8 col-sm-offset-4'>Set Time:</h5>
-       		<select class='col-sm-3' name="Week" id="week">
-			  <option value="This Week">This Week</option>
-			  <option value="Next Week">Next Week</option>
-			  
-			</select>
-       		<select class='col-sm-3' name="day" id='day'>
-			  <option value="Monday">Monday</option>
-			  <option value="Tuesday">Tuesday</option>
-			  <option value="Wednesday">Wednesday</option>
-			  <option value="Thursday">Thursday</option>
-			  <option value="Friday">Friday</option>
-			  <option value="Saturday">Saturday</option>
-			  <option value="Sunday">Sunday</option>
-			</select>
-			<select class='col-sm-3' name="hour" id='hour'>
-			  <option value="1">1</option>
-			  <option value="2">2</option>
-			  <option value="3">3</option>
-			  <option value="4">4</option>
-			  <option value="5">5</option>
-			  <option value="6">6</option>
-			  <option value="7">7</option>
-			  <option value="8">8</option> 
-			  <option value="9">9</option>
-			  <option value="10">10</option>
-			  <option value="11">11</option>`
-			  <option value="12">12</option>
-			</select>
-			<select class='col-sm-2' name="minute" id="minute">
-			  <option value="00">00</option>
-			  <option value="15">15</option>
-			  <option value="30">30</option>
-			  <option value="45">45</option>
-			</select>
-			<select class='col-sm-1' name="morn_eve" id="day_night">
-			  <option value="AM">AM</option>
-			  <option value="PM">PM</option>
-			</select>
-        	<button id='generate_plans_btn' type="button" class="col-sm-3">Generate Plan</button>
-        	<button class='col-sm-4 col-sm-offset-4 return_to_main_from_set_plans'>Back To Main</button>
+			 <form class ='col-sm-8 col-sm-offset-2' id='generate_form'>
+			 <img src='images/roam_menu.png' class='menu_title col-sm-4 col-sm-offset-4'>
+			 <div class='col-sm-12 divider'></div>
+			 <h4 class='col-sm-3 col-sm-offset-5 form_header'>Where to?</h4>
+			 <div class='col-sm-4 col-sm-offset-1 parameter_form'>
+	       		<input type='text' value='dinner' class='col-sm-12 search_parameters' id='search_param1' name='search_param1' placeholder='Enter first stop i.e. "Restaurant"'>
+	       		<input type='text' value='drinks' class='col-sm-12 search_parameters' id='search_param2' name='search_param2' placeholder='Enter second stop i.e. "Bars"'>
+	       		<input type='text' value='club' class='col-sm-12 search_parameters' id='search_param3' name='search_param3' placeholder='Enter third stop i.e. "Club"'>
+	       		<input type='text'  value='Redlands' class='col-sm-12 search_parameters' id='location' name='location' placeholder='Enter city.'>
+       			<span class='col-sm-4 use_my_location'>Use My Location: </span>
+	       		<input type='checkbox' class='col-sm-1' name='coordinates' id='location_check'>
+       		</div>
+       		<div class='col-sm-4 col-sm-offset-1 time_form'>	       		
+	       		<h5 class='col-sm-12'>Set Time:</h5>
+	       		<select class='col-sm-12' name="Week" id="week">
+				  <option value="This Week">This Week</option>
+				  <option value="Next Week">Next Week</option>			  
+				</select>
+	       		<select class='col-sm-12' name="day" id='day'>
+				  <option value="Friday">Friday</option>
+				  <option value="Saturday">Saturday</option>
+				  <option value="Sunday">Sunday</option>
+				  <option value="Monday">Monday</option>
+				  <option value="Tuesday">Tuesday</option>
+				  <option value="Wednesday">Wednesday</option>
+				  <option value="Thursday">Thursday</option>
+				</select>
+				<select class='col-sm-3' name="hour" id='hour'>				  
+				  <option value="9">9</option>
+				  <option value="10">10</option>
+				  <option value="11">11</option>
+				  <option value="12">12</option>
+				  <option value="1">1</option>
+				  <option value="2">2</option>
+				  <option value="3">3</option>
+				  <option value="4">4</option>
+				  <option value="5">5</option>
+				  <option value="6">6</option>
+				  <option value="7">7</option>
+				  <option value="8">8</option> 
+				</select>
+				<select class='col-sm-3 col-sm-offset-1' name="minute" id="minute">
+				  <option value="00">00</option>
+				  <option value="15">15</option>
+				  <option value="30">30</option>
+				  <option value="45">45</option>
+				</select>
+				<select class='col-sm-3 col-sm-offset-1' name="morn_eve" id="day_night">
+				  <option value="PM">PM</option>
+			      <option value="AM">AM</option>
+				</select>
+        	</div>
+        	<button id='generate_plans_btn' type="button" class="col-sm-3">Order My Plans</button>
         </form>
+        
+        <button class='col-sm-4 col-sm-offset-4 return_to_main_from_set_plans'>Back To Main</button>
         
 		</div>
 
@@ -106,6 +112,7 @@
 
 		<div class='friend-page col-sm-8 col-sm-offset-2 hidden'>
 			<h3 class='col-sm-2 col-sm-offset-5'>Who's Invited?</h3>
+			<h4 class='col-sm-2 col-sm-offset-5'>Last Name, Party of #</h4>
 			<div class='friend_container col-sm-6'></div>
 		</div>
 

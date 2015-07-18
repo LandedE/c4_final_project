@@ -11,11 +11,7 @@ span{
 
 }
 
-#generate_form input{
-	height: 10vh;
-  	margin-top: 4vh;
 
-}
 
 #set_plans_btn{
   border-radius: 5px;
@@ -63,8 +59,68 @@ span{
   font-family: cursive;
 }
 
+.menu_title{
+	margin-top: 3vh;
+}
+
 .search_parameters{
 	display: block;
+}
+
+.time_form{
+	margin-top: 6vh;
+}
+
+.time_form select{
+	margin-bottom: 3vh
+}
+
+.divider{
+	height:1vh;
+	background-color:black;
+	padding: 0;
+	margin-top:1vh;
+}
+
+.parameter_form{
+	margin-top: 5vh;
+}
+
+.form_header{
+	font-family:cursive;
+
+}
+
+#search_param1{
+	height: 4vh; 	
+  	float:none;
+}
+
+#search_param2{
+	margin-top: 4vh;
+	height: 4vh; 	
+  	float:none;
+}
+
+#search_param3{
+	margin-top: 4vh;
+	height: 4vh; 	
+  	float:none;
+}
+
+#location{
+	margin-top: 4vh;
+	height: 4vh; 	
+  	float:none;
+}
+
+#generate_plans_btn{
+  top: 20vh;
+  position: relative;
+  right: 3vw;
+  height: 12vh;
+  font-family: cursive;
+  font-size: 3vh
 }
 
 #generate_modal{
@@ -74,7 +130,11 @@ span{
 
 
 #generate_form{
-	height:60%;
+  height: 92%;
+  margin-top: 2vh;
+  border: 1px solid black;
+  border-radius: 5px;
+  background-color: white;
 }
 
 .result_images{
@@ -254,7 +314,11 @@ span{
 }
 
 .use_my_location{
-	margin-top: 8vh;
+	margin-top: 2vh;
+}
+
+#location_check{
+	margin-top: 3vh;
 }
 
 .window_image{
@@ -289,6 +353,14 @@ span{
   color: white;
   font-size: 5vh;
   font-family: cursive;
+}
+
+.main_interface_background{
+  position: absolute;
+  -webkit-filter: grayscale(0.5);
+  opacity: .5;
+  width: 144vh;
+  left: -1vw;
 }
 
 .main_interface_picture{
