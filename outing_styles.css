@@ -329,6 +329,7 @@ span{
   left: 7vw;
   border: 1px solid black;
   border-radius: 5px;
+  padding: 0;
 }
 
 .login_button{
