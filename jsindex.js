@@ -296,55 +296,55 @@ function pullFromStubHub(){
 
 
 
-			function searchForMovies(){
-				$.ajax({
-					url: 'search_for_movies.php',
-					method: 'POST',
-					dataType: 'json',
-					data: {
-						date: '2015-07-21',
-						coordinates: current_location,
-					},
-					success: function(response){
-						console.log('in success function');
-						console.log(response);
-						window.movie_results = response;
-						var theatre_info = [];
-						for(var i=0;i<movie_results.length;i++){
-							var match_count = 0;
-							for(var j=0; j<movie_results[i].showtimes.length;j++){
-								console.log('theatre: ', movie_results[i].showtimes[j].theatre.name);
-								console.log('id : ',movie_results[i].showtimes[j].theatre.id);
-								var individual_theater = { 
-												'name': movie_results[i].showtimes[j].theatre.name,
-												'id': movie_results[i].showtimes[j].theatre.id
-										};
-								console.log('individual theater:',individual_theater);
-								if(theatre_info.length==0){
-									theatre_info.push(individual_theater);
-								}else{
-									for(var x=0;x<theatre_info.length;x++){
-										console.log('individual_theater.id:', individual_theater.id);
-										console.log('theatre_info[x].id: ', theatre_info[x].id);
-										if(individual_theater.id == theatre_info[x].id){
-											match_count+=1;
-											console.log('match_count:',match_count);
-										};
-									};
-									console.log('match_count: ', match_count);
-									if(match_count==0){
-										theatre_info.push(individual_theater);
-									};
-								};
+			// function searchForMovies(){
+			// 	$.ajax({
+			// 		url: 'search_for_movies.php',
+			// 		method: 'POST',
+			// 		dataType: 'json',
+			// 		data: {
+			// 			date: '2015-07-21',
+			// 			coordinates: current_location,
+			// 		},
+			// 		success: function(response){
+			// 			console.log('in success function');
+			// 			console.log(response);
+			// 			window.movie_results = response;
+			// 			var theatre_info = [];
+			// 			for(var i=0;i<movie_results.length;i++){
+			// 				var match_count = 0;
+			// 				for(var j=0; j<movie_results[i].showtimes.length;j++){
+			// 					console.log('theatre: ', movie_results[i].showtimes[j].theatre.name);
+			// 					console.log('id : ',movie_results[i].showtimes[j].theatre.id);
+			// 					var individual_theater = { 
+			// 									'name': movie_results[i].showtimes[j].theatre.name,
+			// 									'id': movie_results[i].showtimes[j].theatre.id
+			// 							};
+			// 					console.log('individual theater:',individual_theater);
+			// 					if(theatre_info.length==0){
+			// 						theatre_info.push(individual_theater);
+			// 					}else{
+			// 						for(var x=0;x<theatre_info.length;x++){
+			// 							console.log('individual_theater.id:', individual_theater.id);
+			// 							console.log('theatre_info[x].id: ', theatre_info[x].id);
+			// 							if(individual_theater.id == theatre_info[x].id){
+			// 								match_count+=1;
+			// 								console.log('match_count:',match_count);
+			// 							};
+			// 						};
+			// 						console.log('match_count: ', match_count);
+			// 						if(match_count==0){
+			// 							theatre_info.push(individual_theater);
+			// 						};
+			// 					};
 
-							};	
-							console.log(theatre_info);
+			// 				};	
+			// 				console.log(theatre_info);
 													
-						};
-						storeTheaterInfo(theatre_info);
-					},
-				});
-			};
+			// 			};
+			// 			storeTheaterInfo(theatre_info);
+			// 		},
+			// 	});
+			// };
 
 			
 
