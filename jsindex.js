@@ -32,7 +32,20 @@ function createDescriptionText(eventData){
 	
 }
 
-		
+
+function pullFromStubHub(){
+	$.ajax({
+		url: 'stubhub.php',
+		dataType: 'json',
+		crossDomain: true,
+		success: function(response){
+			console.log('in success');
+			console.log(response);
+			window.stub_results = response;
+		},
+	});
+};
+
 
     function pullFriends(){
 			        $.ajax({
@@ -46,7 +59,7 @@ function createDescriptionText(eventData){
 
 							displayFriends(response);
 
-				           $('#invite_btn').click(function(){
+				           $('.invite_btn').click(function(){
 				           		console.log('invite button clicked');
 				           		$('.friend-page').toggleClass('hidden');
 				           		$('#main_interface_container').toggleClass('hidden');
@@ -157,12 +170,12 @@ function createDescriptionText(eventData){
 										text: 'Phone: '+ event_array[index_to_generate].display_phone,
 					});
 
-					var swap_button = $('<button>',{
-										class: 'col-sm-12 swap_button',
+					var swap_button = $('<span>',{
+										class: 'col-sm-12 glyphicon glyphicon-refresh swap_button',
 										index_id: index_to_generate,
-										text: 'Swap Event',
 										
-					});
+										
+				});
 					
 					info_container.append(yelp_image, website_link, description_span, price_span, rate_span, review_count_span, hours_op_span, distance_span, phone_span, swap_button);
 					if(index_to_generate==0){
@@ -261,6 +274,81 @@ function createDescriptionText(eventData){
 				});	
 			};
 
+
+			function storeTheaterInfo(theatre_info){
+					$.ajax({
+							url: 'get_coordinates_for_theater.php',
+							data: {
+								'theatre_info': theatre_info,
+								'coordinates': current_location,
+							},
+							method: 'POST',
+							dataType: 'text',
+							success: function(response){
+								console.log('in success');
+								console.log(response);
+
+							},
+						});
+				
+			};
+
+
+
+
+			function searchForMovies(){
+				$.ajax({
+					url: 'search_for_movies.php',
+					method: 'POST',
+					dataType: 'json',
+					data: {
+						date: '2015-07-21',
+						coordinates: current_location,
+					},
+					success: function(response){
+						console.log('in success function');
+						console.log(response);
+						window.movie_results = response;
+						var theatre_info = [];
+						for(var i=0;i<movie_results.length;i++){
+							var match_count = 0;
+							for(var j=0; j<movie_results[i].showtimes.length;j++){
+								console.log('theatre: ', movie_results[i].showtimes[j].theatre.name);
+								console.log('id : ',movie_results[i].showtimes[j].theatre.id);
+								var individual_theater = { 
+												'name': movie_results[i].showtimes[j].theatre.name,
+												'id': movie_results[i].showtimes[j].theatre.id
+										};
+								console.log('individual theater:',individual_theater);
+								if(theatre_info.length==0){
+									theatre_info.push(individual_theater);
+								}else{
+									for(var x=0;x<theatre_info.length;x++){
+										console.log('individual_theater.id:', individual_theater.id);
+										console.log('theatre_info[x].id: ', theatre_info[x].id);
+										if(individual_theater.id == theatre_info[x].id){
+											match_count+=1;
+											console.log('match_count:',match_count);
+										};
+									};
+									console.log('match_count: ', match_count);
+									if(match_count==0){
+										theatre_info.push(individual_theater);
+									};
+								};
+
+							};	
+							console.log(theatre_info);
+													
+						};
+						storeTheaterInfo(theatre_info);
+					},
+				});
+			};
+
+			
+
+
 			function getPlans(){
 				console.log('in get plans');
 				var coordinates = null;
@@ -307,30 +395,44 @@ function createDescriptionText(eventData){
 										type: 'button',
 										id:'prev_btn',
 										class:'col-sm-2',
-										text: 'Prev',
+										
 										onclick: 'prevEvent();',
 				});
-				var accept_button = $('<button>',{
+				var accept_button = $('<span>',{
 										type: 'button',
 										id:'accpt_btn',
-										class:'col-sm-2 col-sm-offset-3',
-										text: 'Wrap Up Plan',
+										class:'col-sm-2 col-sm-offset-3 glyphicon glyphicon-thumbs-up',
+										
 				});
+
+				var accept_text = $('<p>',{
+									text: 'Accept Plan!',
+									class:'accept_text',
+				});
+
+
 				var next_button = $('<button>',{
 										type: 'button',
 										id:'next_btn',
 										class:'col-sm-2 col-sm-offset-3',
-										text: 'Next',
+										
 										onclick:'nextEvent();',
 				});
 				var plan_details_foot = $('<div>',{
 										class:'col-sm-12',
 				});
+				var left_chevron = $('<span>',{
+										class:'left_chevron glyphicon glyphicon-chevron-left',
+ 
+				});
+				var right_chevron = $('<span>',{
+										class:'right_chevron glyphicon glyphicon-chevron-right',
+				});
 
-				carousel_window.append(center_stage);
+				carousel_window.append(center_stage, right_chevron, left_chevron);
 				$('.plan-results').append(carousel_window);
 
-				plan_details_foot.append(prev_button, accept_button, next_button);
+				plan_details_foot.append(prev_button, accept_button, accept_text, next_button);
 				$('.plan-results').append(plan_details_foot);
 					
 					
@@ -461,7 +563,7 @@ function createDescriptionText(eventData){
 					$('.return_to_main_from_set_plans').click(function(){
 							console.log('in back to main');
 							$('#main_interface_container').toggleClass('hidden');
-					   		$('.plans-container').toggleClass('hidden');
+					   		$('#plans-container').toggleClass('hidden');
 					});
 
 					$('.logout_button').click(function(){
@@ -582,9 +684,12 @@ function createDescriptionText(eventData){
 					   		event_container.on('click',function(){
 					   				console.log('clicked event_container');
 					   				console.log(this);
+					   				$('.event_container').removeClass('active');
+					   				event_container.addClass('active');
 					   				var event_id_to_show = $(this).attr('index_id');
 					   				var venues = '.venue_of'+event_id_to_show;
 					   				console.log('venue to show: ',venues);
+					   				$('.venue_container').addClass('hidden');
 					   				$(venues).toggleClass('hidden');
 					   		});
 
@@ -746,7 +851,7 @@ function createEventElements(eventData){
 	var swap_button = $('<button>',{
 						class: 'col-sm-12 swap_button',
 						index_id: eventData.index_id,
-						text: 'Swap Event',
+						text: 'Swap Event',	
 						
 	})
 

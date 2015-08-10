@@ -201,18 +201,27 @@ function displayFriends(arr){
         
       }
 
-        var invite_button = $('<button>',{
-                            type: 'button',
-                            id:'invite_btn',
-                            class:'col-sm-4 col-sm-offset-1',
-                            text:'Send Invites',
+        // var invite_button = $('<button>',{
+        //                     type: 'button',
+                            
+        //                     class:'col-sm-4 col-sm-offset-1 invite_btn',
+        //                     text:'Send Invites',
 
                            
-        });  
+        // });
+
+        var invite_icon = $('<span>',{
+                          class: 'glyphicon glyphicon-envelope invite_envelope invite_btn',
+        });
+
+        var invite_span = $('<span>',{
+                          class: 'invite_span',
+                          text: 'Send Invites',
+        })
 
        
      
-      $('.friend-page').append(invite_button);
+      $('.friend-page').append(invite_icon, invite_span);
 
       $('.checkbutton').click(function(){
             console.log('click');           

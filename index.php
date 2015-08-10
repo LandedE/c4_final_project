@@ -17,6 +17,7 @@
 
 <div class='landing_page col-xs-12 col-sm-8 col-sm-offset-2'> 
 	<h1 class='app_title'>Roam</h1>
+	<p class='description col-sm-6 col-sm-offset-3'>Search your area for places to go out. Get a plan designed for you. Invite your friends from Facebook.</p>
 	<h6 class='copy'>It's a big world...</h6>	
 	<img src="images/window_picture.jpg" class='window_image col-xs-12'>
 	<div id='fb-login' class='col-sm-8 col-sm-offset-4'>
@@ -31,12 +32,25 @@
 
 	<div id="main_interface_container" class="col-sm-8 col-sm-offset-2 hidden">
 		<img src='images/window_picture.jpg' class='window_image'>
+		<div class='set_plans_div'>
+			<button id ='set_plans_btn' type="button">Roam</button>
+			<span class='set_plans_description'>
+				Create a plan.
+			</span>		
+		</div>
+		<div class='manage_circles_div'>
+			<button id='manage_circles_btn'>Friends</button>
+			<span class='manage_circles_description'>
+				View friends and make groups. 
+			</span>		
+		</div>
+		<div class='get_invites_div'>
+			<button id='get_invites_btn'>Pending Events</button>
+			<span class='get_invites_description'>
+				See upcoming events. 
+			</span>		
+		</div>
 		
-		<button id ='set_plans_btn' type="button" class="col-sm-8 col-sm-offset-2">Roam</button>		
-
-		<button id='manage_circles_btn' class='col-sm-8 col-sm-offset-2'>Friends</button>
-		
-		<button id='get_invites_btn' class='col-sm-8 col-sm-offset-2'>Pending Events</button>
 		
 	</div>
 	
@@ -97,7 +111,8 @@
         	</div>
         	<button id='generate_plans_btn' type="button" class="col-sm-3">Order My Plans</button>
         </form>
-        
+        	<span class='glyphicon glyphicon-home return_to_main_from_set_plans' aria-hidden='true'></span>
+			<span class='go_home_text_set_plans'>Back To Main</span>
         <button class='col-sm-4 col-sm-offset-4 return_to_main_from_set_plans'>Back To Main</button>
         
 		</div>
@@ -106,21 +121,25 @@
 
 	
 		<div class="plan-results col-sm-8 col-sm-offset-2 hidden">
-		<h3 class='col-sm-4 col-sm-offset-4'>Review Plan Details</h3>
+		<h3 class='col-sm-4 col-sm-offset-4 review_plan_details_text'>Review Plan Details</h3>
 		</div>
 
 
 		<div class='friend-page col-sm-8 col-sm-offset-2 hidden'>
-			<h3 class='col-sm-2 col-sm-offset-5'>Who's Invited?</h3>
-			<h4 class='col-sm-2 col-sm-offset-5'>Last Name, Party of #</h4>
+			<h3 class='col-sm-2 col-sm-offset-5 invite_prompt'>Who's Invited?</h3>
+			<!-- <h4 class='col-sm-2 col-sm-offset-5'>Last Name, Party of #</h4> -->
 			<div class='friend_container col-sm-6'></div>
 		</div>
 
 		<div class="pending_invitations col-sm-8 col-sm-offset-2 hidden">
-			<h3 class='col-sm-7 col-sm-offset-5'>Pending Invitations</h3>
-			<div class='invitations_container col-sm-5'></div>
+			<h3 class='col-sm-7 col-sm-offset-5 pending_invitations_text'>Pending Invitations</h3>
+			<div class='invitations_container col-sm-5'>
+				
+			</div>
 			<div class='details_of_event col-sm-6 col-sm-offset-1'></div>
-			<button class='col-sm-4 col-sm-offset-4 return_to_main_from_invitations'>Back To Main</button>
+			<span class='glyphicon glyphicon-home return_to_main_from_invitations' aria-hidden='true'></span>
+			<span class='go_home_text'>Back To Main</span>
+			<!-- <button class='col-sm-4 col-sm-offset-4 return_to_main_from_invitations'>Back To Main</button> -->
         </div>
 
 
@@ -143,6 +162,6 @@
   </div>
 </div>
 
-
+ 
 </body>
 </html>
