@@ -62,10 +62,10 @@
 			 <div class='col-sm-12 divider'></div>
 			 <h4 class='col-sm-3 col-sm-offset-5 form_header'>Where to?</h4>
 			 <div class='col-sm-4 col-sm-offset-1 parameter_form'>
-	       		<input type='text' value='dinner' class='col-sm-12 search_parameters' id='search_param1' name='search_param1' placeholder='Enter first stop i.e. "Restaurant"'>
-	       		<input type='text' value='drinks' class='col-sm-12 search_parameters' id='search_param2' name='search_param2' placeholder='Enter second stop i.e. "Bars"'>
-	       		<input type='text' value='club' class='col-sm-12 search_parameters' id='search_param3' name='search_param3' placeholder='Enter third stop i.e. "Club"'>
-	       		<input type='text'  value='Redlands' class='col-sm-12 search_parameters' id='location' name='location' placeholder='Enter city.'>
+	       		<input type='text'  class='col-sm-12 search_parameters' id='search_param1' name='search_param1' placeholder='Enter first stop i.e. "Restaurant"'>
+	       		<input type='text'  class='col-sm-12 search_parameters' id='search_param2' name='search_param2' placeholder='Enter second stop i.e. "Bars"'>
+	       		<input type='text' class='col-sm-12 search_parameters' id='search_param3' name='search_param3' placeholder='Enter third stop i.e. "Club"'>
+	       		<input type='text'  class='col-sm-12 search_parameters' id='location' name='location' placeholder='Enter city.'>
        			<span class='col-sm-4 use_my_location'>Use My Location: </span>
 	       		<input type='checkbox' class='col-sm-1' name='coordinates' id='location_check'>
        		</div>
